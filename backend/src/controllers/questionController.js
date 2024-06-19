@@ -166,12 +166,63 @@ console.log("Error :",error);
 //   }
 // };
 
+// const upvoteQuestion = async (req, res) => {
+//   const { questionId, userId } = req.body;
+
+//   try {
+//     // Check if the upvote already exists
+//     const existingUpvote = await upvoteModel.findOne({ questionId: questionId, userId: userId });
+
+//     // Fetch the question to update the upvote count
+//     const question = await questionModel.findById(questionId);
+
+//     if (!question) {
+//       return res.status(404).json({ success: false, message: 'Question not found' });
+//     }
+
+//     if (existingUpvote) {
+//       // If upvote exists, remove it and decrement the upvote count
+//       await upvoteModel.deleteOne({ _id: existingUpvote._id });
+//       if (question.upvotes > 0) {
+//         question.upvotes -= 1;
+//       }
+//       await question.save();
+//       return res.json({ success: true, upvotes: question.upvotes, question, message: 'Upvote removed' });
+//     } else {
+//       // If upvote does not exist, add it and increment the upvote count
+//       const upvoteInfo = new upvoteModel({
+//         questionId: questionId,
+//         userId: userId
+//       });
+//       await upvoteInfo.save();
+//       question.upvotes += 1;
+//       await question.save();
+//       return res.json({ success: true, upvotes: question.upvotes, question, message: 'Upvote added' });
+//     }
+//   } catch (error) {
+//     console.error("Error updating upvotes:", error);
+//     res.status(500).json({ success: false, message: 'Internal server error' });
+//   }
+// };
+
+// const getUpvoteStatus = async (req, res) => {
+//   const { questionId, userId } = req.body;
+
+//   try {
+//     const existingUpvote = await upvoteModel.findOne({ questionId: questionId, userId: userId });
+//     res.json({ success: true, isUpvoted: !!existingUpvote });
+//   } catch (error) {
+//     console.error("Error fetching upvote status:", error);
+//     res.status(500).json({ success: false, message: 'Internal server error' });
+//   }
+// };
+
 const upvoteQuestion = async (req, res) => {
   const { questionId, userId } = req.body;
 
   try {
     // Check if the upvote already exists
-    const existingUpvote = await upvoteModel.findOne({ questionId: questionId, userId: userId });
+    const existingUpvote = await upvoteModel.findOne({ questionId, userId });
 
     // Fetch the question to update the upvote count
     const question = await questionModel.findById(questionId);
@@ -190,10 +241,7 @@ const upvoteQuestion = async (req, res) => {
       return res.json({ success: true, upvotes: question.upvotes, question, message: 'Upvote removed' });
     } else {
       // If upvote does not exist, add it and increment the upvote count
-      const upvoteInfo = new upvoteModel({
-        questionId: questionId,
-        userId: userId
-      });
+      const upvoteInfo = new upvoteModel({ questionId, userId });
       await upvoteInfo.save();
       question.upvotes += 1;
       await question.save();
@@ -205,5 +253,22 @@ const upvoteQuestion = async (req, res) => {
   }
 };
 
+const getUpvoteStatus = async (req, res) => {
+  const { questionId, userId } = req.body;
 
-export {addQuestion,getAllQuestions,getQuesById,getQuesByUserId,upvoteQuestion};
+  try {
+    const existingUpvote = await upvoteModel.findOne({ questionId, userId });
+
+    if (existingUpvote) {
+      return res.json({ success: true, isUpvoted: true });
+    } else {
+      return res.json({ success: true, isUpvoted: false });
+    }
+  } catch (error) {
+    console.error("Error checking upvote status:", error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+
+export {addQuestion,getAllQuestions,getQuesById,getQuesByUserId,upvoteQuestion,getUpvoteStatus};

@@ -34,6 +34,7 @@ const Hero = ({ stopOnClick, question }) => {
 
   const userId = question.userId;
   console.log(userId);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,8 +50,24 @@ const Hero = ({ stopOnClick, question }) => {
       }
     };
 
+    const fetchUpvoteStatus = async () => {
+      try {
+        const response = await axios.post(`${backend_url}/api/question/upvoteStatus`, {
+          questionId: question._id,
+          userId: userId
+        });
+        if (response.data.success) {
+          setIsUpvote(response.data.isUpvoted);
+        }
+      } catch (error) {
+        console.error("Error checking upvote status:", error);
+      }
+    };
+
     fetchData();
-  }, []);
+    fetchUpvoteStatus();
+
+  }, [backend_url, question._id, userId]);
 
   const handleMoreClick = () => {
     setShowOptions(!showOptions);
@@ -70,7 +87,7 @@ const Hero = ({ stopOnClick, question }) => {
       return;
     }
     e.stopPropagation();
-    navigate("Answer"); // Update this path to match your route
+    navigate("Answer",{state:{question}}); // Update this path to match your route
   };
 
 
@@ -117,6 +134,7 @@ const handleUpvotes = async (e) => {
 
       if (updatedQuestion && typeof updatedQuestion.upvotes === 'number') {
         // If the question details are successfully fetched, update the state with the new upvote count
+    
         setUpvotes(updatedQuestion.upvotes);
       } else {
         console.error("Unexpected API response structure:", response.data);
@@ -133,6 +151,7 @@ const handleUpvotes = async (e) => {
   //   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
   //   return new Date(dateString).toLocaleDateString("en-GB", options);
   // };
+  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -147,7 +166,8 @@ const handleUpvotes = async (e) => {
       <button className="absolute top-2 right-2 text-gray-500">
         <FiX size={20} />
       </button>
-      <div onClick={handleComponentClick} className="cursor-pointer">
+      <div className="cursor-pointer">
+      {/* <div onClick={handleComponentClick} className="cursor-pointer"> */}
         <div className="flex items-center mb-4">
           <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center mr-4">
             <span className="text-gray-500 text-lg">AS</span>
@@ -173,7 +193,7 @@ const handleUpvotes = async (e) => {
             return <img src={file} alt="image" key={file} className="mt-3 mb-3"/>;
           })}
 
-          <p className="text-gray-500 text-[11px] font-normal mb-1 ml-2">
+          <p className="text-gray-500 text-[11px] font-normal mb-1 ml-2" onClick={handleComponentClick}>
             2 Answers
           </p>
           <div className="flex flex-row items-center justify-between sm:flex-row sm:items-center sm:justify-between">

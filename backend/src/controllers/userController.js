@@ -53,8 +53,6 @@ const register_user = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashed_password = await bcrypt.hash(password, salt);
 
-
-    
     let cloudinaryResponse = null;
     console.log(profileLocalPath);
 
@@ -92,8 +90,6 @@ const register_user = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error", error: error.message });
   }
 };
-
-
 
 const getUserDetails = async (req, res) => {
   try {
