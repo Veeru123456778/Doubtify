@@ -149,10 +149,13 @@ import Profile from './pages/Profile';
 import Drafts from './pages/Drafts';
 import Bookmarks from './pages/Bookmarks';
 import Categories from './pages/Categories';
+//import DetailedCategory from './pages/DetailedCategory';
 import Answer from './pages/Answer';
 import UserContextProvider from "./context/userContextProvider";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import DetailedCategory from './pages/DetailedCategory'; // Adjust the import path as needed
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -182,6 +185,7 @@ function App() {
             <Route path="/drafts" element={<Drafts />} />
             <Route path="/bookmarks" element={<Bookmarks />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/detailedCategory" element={<DetailedCategory />} />
             <Route path="/bookmarks/answer" element={<Answer />} />
             <Route path="/questions/answer" element={<Answer />} />
             <Route path="/home/answer" element={<Answer />} />
