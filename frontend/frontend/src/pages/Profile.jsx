@@ -67,16 +67,18 @@ const [isModalOpen, setIsModalOpen] = useState(false);
       </p>
       <div className='flex'>
       <h1 className="text-xl font-semibold mb-2">Area of Interest</h1>
-      <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600" onClick={openModal}>
+      {/* <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600" onClick={openModal}>
           <FaEdit className="mr-2" /> Edit
-        </button>
+        </button> */}
 
       </div>
       <div className="flex space-x-2 mb-4">
        {user.interests.map((interest,index)=>{
        return <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full" key={index}>{interest}</span>
        })}
-        {/* <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Data Structures</span> */}
+        <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Data Structures</span>
+        <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Web Development</span>
+        <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Blockchain</span>
       </div>
 
       <hr className="border-gray-300 mb-4" />

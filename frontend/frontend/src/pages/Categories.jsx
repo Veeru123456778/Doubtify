@@ -43,26 +43,13 @@ const Categories = () => {
 
        <div className="flex justify-center items-center">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mt-4 gap-5">
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
-        <CategoryCard category="Blockchain" count="2531285" />
+        <CategoryCard category="Blockchain" count="2585" />
+        <CategoryCard category="Data Structures" count="253" />
+        <CategoryCard category="Machine Learning" count="1285" />
+        <CategoryCard category="Artificial Intelligence" count="2585" />
+        <CategoryCard category="Operating System" count="2285" />
+        <CategoryCard category="Computer Networks" count="25" />
+        
         {/* Add more CategoryCard components here */}
       </div>
     </div>

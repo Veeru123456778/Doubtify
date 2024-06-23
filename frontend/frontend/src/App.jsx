@@ -153,6 +153,10 @@ import Answer from './pages/Answer';
 import UserContextProvider from "./context/userContextProvider";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify';
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -189,7 +193,10 @@ function App() {
         </div>
         {!isAuthPage && <RightSidebar className="w-1/4" />}
       </div>
+      <ToastContainer autoClose={3000}/>
+
     </UserContextProvider>
+
   );
 }
 

@@ -1,17 +1,17 @@
 import mongoose, { Schema } from 'mongoose'
 
 const bookmarkSchema=  new mongoose.Schema({
-    user_id:{
+    userId:{
         type:Schema.Types.ObjectId,
         ref:'User',
         required:true
     },
-    question_id:{
+    questionId:{
         type:Schema.Types.ObjectId,
-        ref:'QuestionModel',
+        ref:'questionModel',
         required:true
     },
-    answer_id:{
+    answerId:{
         type:Schema.Types.ObjectId,
         ref:'answerModel'
     },

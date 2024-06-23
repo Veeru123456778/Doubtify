@@ -106,7 +106,7 @@ const getUserDetails = async (req, res) => {
 
 const getOtherUserInfo = async(req,res)=>{
   try {
-    const user = await userModel.findById(req.body.userId);
+    const user = await userModel.findById(req.body.user_Id);
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }

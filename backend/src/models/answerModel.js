@@ -18,7 +18,15 @@ const answerSchema = new mongoose.Schema({
     },
     files:[
         {type:String}
-    ]
+    ],
+    upvotes:{
+        type:Number,
+        default:0
+    },
+    downVotes:{
+        type:Number,
+        default:0
+    }
 
 },{timestamps:true})
 

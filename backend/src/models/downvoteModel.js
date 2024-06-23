@@ -1,15 +1,12 @@
 import mongoose, { Schema } from 'mongoose'
 
-const upvotesSchema =  new mongoose.Schema({
+const DownvotesSchema =  new mongoose.Schema({
     userId:{
         type:Schema.Types.ObjectId,
         ref:'User',
         required:true
     },
-    questionId:{
-        type:Schema.Types.ObjectId,
-        ref:'QuestionModel',
-    },
+  
     answerId:{
         type:Schema.Types.ObjectId,
         ref:'answerModel'
@@ -17,6 +14,11 @@ const upvotesSchema =  new mongoose.Schema({
 },{timestamps:true})
 
 
-const upvoteModel = mongoose.model('upvoteModel',upvotesSchema);
+const downvoteModel = mongoose.model('downvoteModel',DownvotesSchema);
 
-export default upvoteModel;
+export default downvoteModel;
+
+  // questionId:{
+    //     type:Schema.Types.ObjectId,
+    //     ref:'QuestionModel',
+    // },

@@ -3,13 +3,19 @@ import { FiChevronDown } from 'react-icons/fi';
 import Hero from '../components/Hero';
 import UserContext from '../context/userContext';
 import axios from 'axios';
+import useFetchUser from '../hooks/useFetchUser';
+import AnswerCard from '../components/AnswerCard';
 
 const Bookmarks = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('Select Filter');
   const [questions, setQuestions] = useState([]);
+  const [bookmarks,setBookmarks] = useState([]);
   const { backend_url } = useContext(UserContext);
+  const {user,setUser,token} = useContext(UserContext);
+  const loading = useFetchUser(token,setUser);
 
+  // console.log("User is :",user);
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
   };
@@ -21,22 +27,42 @@ const Bookmarks = () => {
 
   
   useEffect(() => {
+    const userId=user._id;
+    console.log("UserId: ",userId);
+    // const fetchBookmarks = async()=>{
+    //    const response = await axios.get(`${backend_url}/api/bookmark/get`,{userId:userId});
+    //    console.log("Response is :",response);
+    //  }
+    const fetchBookmarks = async () => {
+      try {
+          const response = await axios.get(`${backend_url}/api/bookmark/get/${userId}`);
+          if(response.data.success){
+            setBookmarks(response.data.bookmarks);
+          }
+      } catch (error) {
+          console.error("Error fetching bookmarks:", error);
+      }
+  };
+
     const fetchData = async () => {
       try {
         const response = await axios.get(`${backend_url}/api/question/questions`);
         if (response.data.success) {
           setQuestions(response.data.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.error('Error displaying questions:', error);
       }
     };
-
     fetchData();
+    fetchBookmarks();
   }, [backend_url]);
 
 
+  if(loading){
+    <div>Loading...</div>
+  }
+console.log("Bookmarks are: ",bookmarks);
   return(
     <div className="w-full p-6 flex flex-col items-center">
       <div className=' w-full md:w-1/2'>
@@ -67,8 +93,18 @@ const Bookmarks = () => {
       <hr className="mt-3 border-gray-300" />
       </div>
       <div className='flex flex-col justify-center items-center w-full'>
-      {questions.map((ques, index) => (
-          <Hero question={ques} key={index} />
+      {/* {bookmarks.map((bookmark, index) => (
+        <> <Hero question={bookmark.questionId} key={index} />
+        {bookmark.answerId?<AnswerCard answer={bookmark.answerId} key={index} question={bookmark.questionId}/>:''}
+
+    </>
+        
+        ))} */}
+        {bookmarks.map((bookmark, index) => (
+          <div key={index} className='flex flex-col items-center'>
+            <Hero question={bookmark.questionId} />
+            {bookmark.answerId ? <AnswerCard answer={bookmark.answerId} question={bookmark.questionId} /> : ''}
+        </div>
         ))}
       </div>
     </div>
@@ -78,3 +114,4 @@ const Bookmarks = () => {
 };
 
 export default Bookmarks;
+

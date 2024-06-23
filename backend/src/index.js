@@ -6,6 +6,8 @@ import cors from "cors";
 import inerestRouter from "./routes/interestRoutes.js";
 import questionRouter from "./routes/questionRoutes.js";
 import answerRouter from "./routes/answerRoutes.js";
+import bookmarkRouter from "./routes/bookmarkRoutes.js";
+import draftRouter from "./routes/draftsRoutes.js";
 
 
 dotenv.config();
@@ -22,6 +24,8 @@ app.use("/api/user", userRouter);
 app.use("/api/interests", inerestRouter);
 app.use('/api/question',questionRouter);
 app.use('/api/answer',answerRouter);
+app.use('/api/bookmark',bookmarkRouter);
+app.use('/api/draft',draftRouter);
 
 app.get("/", (req, res) => {
   res.send("API IS WORKING");

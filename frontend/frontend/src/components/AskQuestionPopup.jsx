@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from '../context/userContext';
+import { toast } from 'react-toastify';
 
 const AskQuestionPopup = ({ onClose }) => {
   const [category, setCategory] = useState('');
@@ -59,8 +60,6 @@ const AskQuestionPopup = ({ onClose }) => {
       formData.append('files', file);
     });
 
-
-
     try {
       const response = await axios.post(
         `${backend_url}/api/question/${user._id}/add`,
@@ -71,13 +70,14 @@ const AskQuestionPopup = ({ onClose }) => {
           },
         }
       );
-      if (response.status === 200) {
-        alert('Question added successfully!');
+      if (response.status === 201) {
+       toast.success(response.data.message);
+       window.location.reload();
         onClose();
       }
     } catch (error) {
       console.error('Error adding question:', error);
-      alert('Failed to add question. Please try again.');
+      toast.error('Failed to add question. Please try again.');
     }
   };
 
@@ -98,7 +98,7 @@ const AskQuestionPopup = ({ onClose }) => {
             style={{ lineHeight: '24px' }}
           />
         </div>
-        <div className=' flex-col sm:flex sm:flex-row gap-3'>
+        <div className='flex-col sm:flex sm:flex-row gap-3'>
         <div className="mb-4">
           <select
             className="w-48 border border-gray-300 p-2 rounded"
