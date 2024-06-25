@@ -98,6 +98,8 @@ import AskQuestionPopup from './AskQuestionPopup';
 import NotificationPopup from './NotificationPopup';
 import UserContext from '../context/userContext';
 import useFetchUser from '../hooks/useFetchUser';
+import { toast } from 'react-toastify';
+
 
 const NavBar = ({ toggleSidebar }) => { // Accept toggleSidebar prop
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -114,6 +116,7 @@ const NavBar = ({ toggleSidebar }) => { // Accept toggleSidebar prop
         setToken("");
         setUser(null);
         navigate('/signin');
+        toast.info("Logged Out Successfully!");
       }
       };
 

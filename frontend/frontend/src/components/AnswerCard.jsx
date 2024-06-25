@@ -3,6 +3,8 @@ import { FiX, FiMoreHorizontal, FiLink, FiBookmark, FiArrowUp, FiArrowDown } fro
 import UserContext from '../context/userContext';
 import useFetchUser from '../hooks/useFetchUser';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 const AnswerCard = ({ answer,question }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -168,6 +170,18 @@ const AnswerCard = ({ answer,question }) => {
     return `${day}-${month}-${year}`;
   };
 
+  const handleCopyLink = () => {
+    const link = `${window.location.origin}/question/${question._id}/answer/${answer._id}`;
+    navigator.clipboard.writeText(link)
+      .then(() => {
+        toast.success("Link copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Error copying link:", err);
+        toast.error("Error copying link");
+      });
+  };
+
   return (
     <div className="bg-gray-100 xl:p-6 p-4 rounded-lg shadow-lg md:w-1/2 w-full my-4 place-items-center relative">
       <button className="absolute top-2 right-2 text-gray-500">
@@ -208,7 +222,7 @@ const AnswerCard = ({ answer,question }) => {
             </button>
             {showOptions && (
               <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg z-10">
-                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleCopyLink}>
                   <FiLink className="mr-2" /> Copy Link
                 </button>
                 <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleBookmark}>

@@ -6,12 +6,14 @@ import axios from 'axios';
 
 const Drafts = () => {
   const {backend_url,token,user,setUser} = useContext(UserContext);
-  const loading = useFetchUser(token,setUser);
+  const loading =  useFetchUser(token,setUser);
   const [drafts,setDrafts] = useState([]);
   
   useEffect(() => {
+    if(user){
     const userId = user._id;
     console.log("UserId: ",userId);
+  
     // const fetchBookmarks = async()=>{
     //    const response = await axios.get(`${backend_url}/api/bookmark/get`,{userId:userId});
     //    console.log("Response is :",response);
@@ -28,10 +30,14 @@ const Drafts = () => {
       }
     };
       fetchDrafts();
-    }, [backend_url,user._id,drafts]);
+  }
+    }, [backend_url,user,drafts]);
 
     if(loading){
     return <div>Loading...</div>
+     }
+     if(!user){
+      return null;
      }
   return <div className='gap-y-8 flex flex-col w-full items-center'>
     {/* <div className="sticky top-0 bg-white   p-4">
@@ -45,7 +51,9 @@ const Drafts = () => {
         <hr className='mt-3 border-gray-300'/>
       </div>
     <div className='gap-y-8 flex flex-col justify-center items-center w-full '>
-
+    {drafts.length === 0 && (
+          <p className="text-gray-600">You have no drafts yet.</p>
+        )}
     {drafts.map((draft, index) => (
           <div key={index} className='flex flex-col items-center w-full'>
             <DraftCard draft={draft} />

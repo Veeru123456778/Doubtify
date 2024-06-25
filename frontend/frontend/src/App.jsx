@@ -149,11 +149,13 @@ import Profile from './pages/Profile';
 import Drafts from './pages/Drafts';
 import Bookmarks from './pages/Bookmarks';
 import Categories from './pages/Categories';
+//import DetailedCategory from './pages/DetailedCategory';
 import Answer from './pages/Answer';
 import UserContextProvider from "./context/userContextProvider";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import { ToastContainer, toast } from 'react-toastify';
+import PublicQuestion from './components/PublicQuestion';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify';
 
@@ -168,9 +170,10 @@ function App() {
   };
 
   // Correct condition to check if the current path is /, /signin or /signup
-  const isAuthPage = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup';
+  const isAuthPage = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup' || location.pathname.startsWith('/question/');
 
   return (
+ 
     <UserContextProvider>
       {!isAuthPage && <NavBar toggleSidebar={toggleSidebar}/>}
       <div className={`flex ${!isAuthPage ? 'pt-16' : ''} justify-center items-center`}>
@@ -189,12 +192,15 @@ function App() {
             <Route path="/bookmarks/answer" element={<Answer />} />
             <Route path="/questions/answer" element={<Answer />} />
             <Route path="/home/answer" element={<Answer />} />
+            <Route path="/question/:id" element={<PublicQuestion />} />
+
           </Routes>
         </div>
         {!isAuthPage && <RightSidebar className="w-1/4" />}
       </div>
-      <ToastContainer autoClose={3000}/>
-
+      <ToastContainer  autoClose={3000} // auto-close after 3 seconds
+      />
+   
     </UserContextProvider>
 
   );

@@ -131,7 +131,7 @@
 
 // export default DraftCard;
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaEdit, FaTrashAlt, FaTimes } from 'react-icons/fa';
 import axios from 'axios';
@@ -144,7 +144,6 @@ const DraftCard = ({ draft }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showAnswerPopup, setShowAnswerPopup] = useState(false);
-  const [question, setQuestion] = useState(false);
 
   console.log('Draft IDD: ', draft._id);
 
@@ -170,7 +169,7 @@ const DraftCard = ({ draft }) => {
   const handleEdit = () => {
     setShowAnswerPopup(true);
   };
-
+  
   return (
     <div className="relative p-4 bg-white rounded-lg shadow-md w-full md:w-1/2">
       <div className="absolute top-2 left-4 text-gray-600 text-xs">Answer • Unpublished</div>
@@ -178,7 +177,7 @@ const DraftCard = ({ draft }) => {
         <FaTimes />
       </button>
       <div className="mt-2 mb-4">
-        <h2 className="text-lg font-bold">How can I learn data structures efficiently?</h2>
+        <h2 className="text-lg font-bold">{draft.question_id.body}</h2>
         <p className="text-gray-700 mt-1 font-light leading-5">
           {draft.body}
         </p>
@@ -198,7 +197,7 @@ const DraftCard = ({ draft }) => {
       {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
       {showAnswerPopup && (
         <AnswerPopup
-          question={{ body: "How can I learn data structures efficiently?", _id: draft.question_id }}
+          question={{ body: draft.question_id.body, _id: draft.question_id._id }}
           setShowAnswerPopup={setShowAnswerPopup}
           draft={draft}
         />

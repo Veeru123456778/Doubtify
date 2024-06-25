@@ -105,6 +105,82 @@ const Signin = () => {
 
 export default Signin;
 
+// import React, { useState } from 'react';
+// import { FaFacebookF, FaGooglePlusG, FaLinkedinIn } from 'react-icons/fa';
+
+// const Singin = () => {
+//   const [rightPanelActive, setRightPanelActive] = useState(false);
+
+//   const handleSignUpClick = () => {
+//     setRightPanelActive(true);
+//   };
+
+//   const handleSignInClick = () => {
+//     setRightPanelActive(false);
+//   };
+
+//   return (
+//     <div className=" flex flex-col items-center justify-center min-h-screen bg-gray-100">
+//       <div className={`relative w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden ${rightPanelActive ? 'right-panel-active' : ''}`}>
+//         <div className={`absolute inset-0 transition-transform duration-600 ease-in-out transform ${rightPanelActive ? 'translate-x-full' : ''}`}>
+//           <div className="w-1/2 h-full float-left flex flex-col items-center justify-center px-8 py-12 bg-white">
+//             <form className="flex flex-col items-center justify-center w-full h-full">
+//               <h1 className="text-2xl font-bold mb-4">Create Account</h1>
+//               <div className="flex justify-center mb-4">
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaFacebookF className="text-xl text-gray-600" /></a>
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaGooglePlusG className="text-xl text-gray-600" /></a>
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaLinkedinIn className="text-xl text-gray-600" /></a>
+//               </div>
+//               <span className="mb-4 text-sm">or use your email for registration</span>
+//               <input type="text" placeholder="Name" className="w-full px-4 py-2 mb-3 border rounded bg-gray-100" />
+//               <input type="email" placeholder="Email" className="w-full px-4 py-2 mb-3 border rounded bg-gray-100" />
+//               <input type="password" placeholder="Password" className="w-full px-4 py-2 mb-3 border rounded bg-gray-100" />
+//               <button className="px-6 py-2 mt-4 text-sm font-bold text-white bg-red-500 rounded hover:bg-red-600">Sign Up</button>
+//             </form>
+//           </div>
+//           <div className="w-1/2 h-full float-left flex flex-col items-center justify-center px-8 py-12 bg-white">
+//             <form className="flex flex-col items-center justify-center w-full h-full">
+//               <h1 className="text-2xl font-bold mb-4">Sign in</h1>
+//               <div className="flex justify-center mb-4">
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaFacebookF className="text-xl text-gray-600" /></a>
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaGooglePlusG className="text-xl text-gray-600" /></a>
+//                 <a href="#" className="p-3 mx-1 border rounded-full"><FaLinkedinIn className="text-xl text-gray-600" /></a>
+//               </div>
+//               <span className="mb-4 text-sm">or use your account</span>
+//               <input type="email" placeholder="Email" className="w-full px-4 py-2 mb-3 border rounded bg-gray-100" />
+//               <input type="password" placeholder="Password" className="w-full px-4 py-2 mb-3 border rounded bg-gray-100" />
+//               <a href="#" className="mb-4 text-sm">Forgot your password?</a>
+//               <button className="px-6 py-2 mt-4 text-sm font-bold text-white bg-red-500 rounded hover:bg-red-600">Sign In</button>
+//             </form>
+//           </div>
+//         </div>
+//         <div className="absolute inset-0 w-1/2 transition-transform duration-600 ease-in-out transform bg-gradient-to-r from-red-400 to-pink-500 z-10">
+//           <div className="absolute flex flex-col items-center justify-center w-1/2 h-full px-8 py-12 text-center text-white bg-opacity-75 overlay-left left-0">
+//             <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
+//             <p className="mb-4 text-sm">To keep connected with us please login with your personal info</p>
+//             <button className="px-6 py-2 mt-4 text-sm font-bold text-white border border-white rounded hover:bg-white hover:text-red-500" onClick={handleSignInClick}>Sign In</button>
+//           </div>
+//           <div className="absolute flex flex-col items-center justify-center w-1/2 h-full px-8 py-12 text-center text-white bg-opacity-75 overlay-right right-0">
+//             <h1 className="text-2xl font-bold mb-4">Hello, Friend!</h1>
+//             <p className="mb-4 text-sm">Enter your personal details and start journey with us</p>
+//             <button className="px-6 py-2 mt-4 text-sm font-bold text-white border border-white rounded hover:bg-white hover:text-red-500" onClick={handleSignUpClick}>Sign Up</button>
+//           </div>
+//         </div>
+//       </div>
+//       <footer className="fixed bottom-0 w-full p-4 text-sm text-center text-white bg-gray-800">
+//         <p>
+//           Created with <i className="fa fa-heart text-red-500"></i> by
+//           <a target="_blank" href="https://florin-pop.com" className="text-blue-400"> Florin Pop </a>
+//           - Read how I created this and how you can join the challenge
+//           <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/" className="text-blue-400"> here</a>.
+//         </p>
+//       </footer>
+//     </div>
+//   );
+// };
+
+// export default Singin;
+
 // import React, { useContext, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
