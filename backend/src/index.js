@@ -13,6 +13,17 @@ import draftRouter from "./routes/draftsRoutes.js";
 dotenv.config();
 
 const app = express();
+
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || 'your-session-secret',
+//   resave: false,
+//   saveUninitialized: true
+// }));
+
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+
 const port = process.env.PORT || 3000;
 connectDB();
 
@@ -26,6 +37,7 @@ app.use('/api/question',questionRouter);
 app.use('/api/answer',answerRouter);
 app.use('/api/bookmark',bookmarkRouter);
 app.use('/api/draft',draftRouter);
+// app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {
   res.send("API IS WORKING");
