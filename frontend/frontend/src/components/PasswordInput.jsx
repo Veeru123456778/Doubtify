@@ -9,7 +9,9 @@ const PasswordInput = ({ value, onChange }) => {
                 type={showPassword ? 'text' : 'password'}
                 value={value}
                 onChange={onChange}
-                className="w-full px-3 py-2 border rounded-lg"
+                className="form-input w-full text-gray-300"
+                placeholder="Password (at least 10 characters)"
+                required
             />
             <button
                 type="button"

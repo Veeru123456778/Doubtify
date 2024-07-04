@@ -59,8 +59,10 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
    
-    password: { type: String, required: function() { return !this.googleId; } },
-
+    password: {
+      type: String,
+      required: function() { return !this.GoogleLogin; }, // Only require password if not a Google login
+    },
     profile_picture: {
       type: String,
     },
@@ -91,8 +93,7 @@ const userSchema = new mongoose.Schema(
         ref:'upvoteModel'
        }
     ],
-    googleId: { type: String, unique: true, sparse: true },
-
+    GoogleLogin: { type: Boolean ,default:false },
   },
   { timestamps: true }
 );

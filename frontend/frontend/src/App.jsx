@@ -139,7 +139,6 @@
 
 import React, { useState,useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-
 import NavBar from './components/NavBar';
 import LeftSidebar from './components/LeftSidebar';
 import RightSidebar from './components/RightSidebar';
@@ -163,6 +162,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Landing from './pages/landing.jsx'
 import UserContext from './context/userContext.js';
+import {GoogleOAuthProvider} from '@react-oauth/google';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -234,9 +234,11 @@ function App() {
 function AppContainer() {
   return (
     <UserContextProvider>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
     <Router>
       <App />
     </Router>
+    </GoogleOAuthProvider>
     </UserContextProvider>
   );
 }

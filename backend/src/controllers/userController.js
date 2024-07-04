@@ -32,6 +32,25 @@ const login_user = async (req, res) => {
   }
 };
 
+
+const login_userGoogle = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const userExist = await userModel.findOne({ email });
+
+    if (!userExist) {
+      return res.json({ success: false, message: "User does not exist" });
+    }
+
+    const token = createToken(userExist._id);
+
+    res.json({ success: true, token });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+
 const register_user = async (req, res) => {
 
   const { email, password, firstName,lastName } = req.body;
@@ -90,6 +109,43 @@ const register_user = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error", error: error.message });
   }
 };
+
+
+const registerByGoogle = async (req,res)=>{
+  const { firstName, lastName, email, profile_picture, GoogleLogin } = req.body;
+  try {
+    // Validate email
+    // if (!validator.isEmail(email)) {
+    //   return res.status(400).json({ success: false, message: "Email is not valid" });
+    // }
+    
+        // Check if user already exists
+    const userExist = await userModel.findOne({ email });
+    if (userExist) {
+      return res.status(409).json({ success: false, message: "User already exists" });
+    }
+    const newUser = new userModel({
+      email,
+      firstName: firstName,
+      lastName:lastName,
+      profile_picture:profile_picture,
+      GoogleLogin:GoogleLogin,
+      // password:'1234'
+    });
+
+    // Save the user to the database
+    const user = await newUser.save();
+
+    // Generate token
+    const token = createToken(user._id);
+
+    // Respond with success
+    res.status(201).json({ success: true, token });
+  } catch (error) {
+    console.error('Error during user registration:', error);
+    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+  }
+}
 
 const getUserDetails = async (req, res) => {
   try {
@@ -152,4 +208,4 @@ const getUserInterests =  (async (req, res) => {
 
 
 
-export { login_user, register_user, getUserDetails ,updateUserInterests,getUserInterests,getOtherUserInfo};
+export { login_user, register_user, getUserDetails ,updateUserInterests,getUserInterests,getOtherUserInfo,registerByGoogle,login_userGoogle};
