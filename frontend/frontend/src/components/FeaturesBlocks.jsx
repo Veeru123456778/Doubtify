@@ -12,7 +12,7 @@ function FeaturesBlocks() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className={isDarkTheme?'h2 mb-4':'text-black h2 mb-4'}>Explore Our Powerful Features.</h2>
+            <h2 className={isDarkTheme ? 'h1 mb-4 text-white' : 'h1 mb-4 text-black'}>Explore Our Powerful Features.</h2>
             <p className="text-xl text-gray-400">"Discover the tools that make Doubtify the best platform for resolving academic doubts. From saving important questions to sharing and searching for answers, we've got everything you need to enhance your learning experience.</p>
           </div>
 

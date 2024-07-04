@@ -232,7 +232,7 @@
 // export default Signup;
 
 
-import React from 'react';
+import React,{useContext} from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -241,7 +241,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { createOrGetUser } from '../utils';
 // import Banner from '../components/Banner';
 
-const SignUp = ()=> {
+// const SignUp = ()=> {
   // const signUp = useGoogleLogin({
   //   onSuccess:(response)=>{
   //     createOrGetUser(response);
@@ -252,6 +252,12 @@ const SignUp = ()=> {
   // })
 
 
+import UserContext from '../context/userContext';
+
+// import Banner from '../components/Banner';
+
+function SignUp() {
+  const {isDarkTheme} = useContext(UserContext);
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -272,7 +278,7 @@ const SignUp = ()=> {
 
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                <h1 className="h1">Welcome. We exist to make entrepreneurship easier.</h1>
+                <h1 className={isDarkTheme ? 'h1 text-white' : 'h1 text-black'}>Welcome. We exist to solve your doubts.</h1>
               </div>
 
               {/* Form */}
@@ -299,7 +305,7 @@ const SignUp = ()=> {
                 <form>
                 <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="email">Email <span className="text-red-600">*</span></label>
                       <input id="email" type="email" className="form-input w-full text-gray-300" placeholder="Example@gamil.com" required />
                     </div>
                     </div>
@@ -307,29 +313,29 @@ const SignUp = ()=> {
 
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">Password <span className="text-red-600">*</span></label>
                       <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">confirm Password <span className="text-red-600">*</span></label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">confirm Password <span className="text-red-600">*</span></label>
                       <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
                     </div>
                   </div>
                   <div className="flex  -mx-3 mb-4">
                     <div className="w-full flex flex-col px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="full-name">First Name<span className="text-red-600">*</span></label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="full-name">First Name<span className="text-red-600">*</span></label>
                       <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="First name" required />
                     </div>
                     <div className="w-full flex flex-col px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="full-name">Last Name <span className="text-red-600">*</span></label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="full-name">Last Name <span className="text-red-600">*</span></label>
                       <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="last name" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="profile-picture">Profile Picture</label>
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="profile-picture">Profile Picture</label>
                       <input id="profile-picture" type="file" className="form-input w-full text-gray-300" />
                     </div>
                   </div>

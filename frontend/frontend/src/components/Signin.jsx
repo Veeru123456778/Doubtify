@@ -120,6 +120,8 @@ import { createOrGetUser } from "../utils";
 function SignIn() {
   const { token, setToken, backend_url, setUser } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState("");
+  const {isDarkTheme} = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -166,6 +168,7 @@ function SignIn() {
 
   console.log("Rendering Signin component");
 
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}
@@ -186,9 +189,7 @@ function SignIn() {
             <div className="pt-32 pb-12 md:pt-40 md:pb-20">
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-                <h1 className="h1">
-                  Welcome back. We exist to solve your doubts.
-                </h1>
+                <h1 className={isDarkTheme ? 'h1 text-white' : 'h1 text-black'}>Welcome back. We exist to solve your doubts.</h1>
               </div>
 
               {/* Form */}
@@ -232,12 +233,13 @@ function SignIn() {
                 <form>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label
+                      {/* <label
                         className="block text-gray-300 text-sm font-medium mb-1"
                         htmlFor="email"
                       >
                         Email
-                      </label>
+                      </label> */}
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="email">Email</label>
                       <input
                         id="email"
                         type="email"
@@ -248,16 +250,19 @@ function SignIn() {
                         placeholder="Example@gmail.com"
                         required
                       />
+                      
+                      {/* <input id="email" type="email" className="form-input w-full text-gray-300" placeholder="Example@gamil.com" required /> */}
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label
+                      {/* <label
                         className="block text-gray-300 text-sm font-medium mb-1"
                         htmlFor="password"
                       >
                         Password
-                      </label>
+                      </label> */}
+                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">Password</label>
                       {/* <input
                         id="password"
                         type="password"
@@ -271,6 +276,7 @@ function SignIn() {
                           setFormData({ ...formData, password: e.target.value })
                         }
                       />
+                  
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
@@ -278,9 +284,7 @@ function SignIn() {
                       <div className="flex justify-between">
                         <label className="flex items-center">
                           <input type="checkbox" className="form-checkbox" />
-                          <span className="text-gray-400 ml-2">
-                            Keep me signed in
-                          </span>
+                          <span className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300 ml-2' : 'font-medium mb-1  block text-sm text-black ml-2'}>Keep me signed in</span>
                         </label>
                         <Link
                           to="/reset-password"

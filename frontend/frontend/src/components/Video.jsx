@@ -18,7 +18,7 @@ const Video = () => {
           mb="80px"
         /> */}
          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className={isDarkTheme?'h2 mb-4':'text-black h2 mb-4'}>See Our Platform in Action.
+            <h2 className={isDarkTheme ? 'h1 mb-4 text-white' : 'h1 mb-4 text-black'}>See Our Platform in Action.
             </h2>
             <p className="text-xl text-gray-400">Watch this quick demo to learn how Doubtify works. Discover how easy it is to ask questions, get answers, and make the most out of our powerful features.</p>
           </div>
