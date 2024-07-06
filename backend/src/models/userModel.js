@@ -93,6 +93,11 @@ const userSchema = new mongoose.Schema(
         ref:'upvoteModel'
        }
     ],
+    notifications:[
+      {
+      type:String
+      }
+    ],
     GoogleLogin: { type: Boolean ,default:false },
   },
   { timestamps: true }

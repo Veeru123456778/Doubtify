@@ -11,6 +11,7 @@ import {
 } from "../controllers/userController.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import authMiddleware from "../middlewares/authentication.js";
+import { notifications } from "../controllers/notificationController.js";
 
 const userRouter = express.Router();
 
@@ -22,6 +23,6 @@ userRouter.get("/userInfo", authMiddleware, getUserDetails);
 userRouter.post("/otheruserInfo", getOtherUserInfo); 
 userRouter.put('/:userId/interests', updateUserInterests);
 userRouter.get('/:userId/interests', getUserInterests);
-
+userRouter.post('/notification/:userId',notifications);
 
 export default userRouter;

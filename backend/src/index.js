@@ -8,7 +8,7 @@ import questionRouter from "./routes/questionRoutes.js";
 import answerRouter from "./routes/answerRoutes.js";
 import bookmarkRouter from "./routes/bookmarkRoutes.js";
 import draftRouter from "./routes/draftsRoutes.js";
-
+import searchrouter from "./routes/searchRoutes.js";
 
 dotenv.config();
 
@@ -37,6 +37,7 @@ app.use('/api/question',questionRouter);
 app.use('/api/answer',answerRouter);
 app.use('/api/bookmark',bookmarkRouter);
 app.use('/api/draft',draftRouter);
+app.use('/api/search',searchrouter);
 // app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {

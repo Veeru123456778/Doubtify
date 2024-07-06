@@ -53,6 +53,17 @@ const AnswerPopup = ({ question, setShowAnswerPopup,draft=null }) => {
         }
       );
       if (response.status === 201) {
+        try{
+          const notification = `@${user.firstName} has answered your question`;
+          const response = await axios.post(
+            `${backend_url}/api/user/notification/${user._id}`,
+            {notification,question});
+            if(response.data.success){
+              return;
+            }
+        }catch(error){
+          console.error('Error adding notification:', error);
+        }
         toast.success('Answer added successfully!');
         // onClose();
         setShowAnswerPopup(false);
