@@ -319,8 +319,10 @@ const Bookmarks = () => {
       </div>
 
       <div className="flex flex-col justify-center items-center w-full">
-        {bookmarks.length === 0 && (
+        {bookmarks.length === 0 && (<div className='items-center'>
           <p className="mt-4 text-gray-600">You have no bookmarks yet.</p>
+          <img src='/noBookmark.png' alt=''  />
+          </div>
         )}
 
         {bookmarks.map((bookmark, index) => (

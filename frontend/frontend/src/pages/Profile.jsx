@@ -289,6 +289,7 @@ import useFetchUser from '../hooks/useFetchUser';
 import InterestModal from '../components/InterestModal';
 import axios from 'axios';
 import Hero from '../components/Hero';
+import AnswerCard from '../components/AnswerCard';
 
 const Profile = () => {
   const { setUser, token, user ,backend_url} = useContext(UserContext);
@@ -297,8 +298,10 @@ const Profile = () => {
   const [editProfile, setEditProfile] = useState(false);
   const [editDescription, setEditDescription] = useState(false);
   const [questions,setQuestions] = useState([]);
+  const [answers,setAnswers] = useState([]);
+  const [btnfiels,setBtnField] = useState('questions');
   const [error,setError] = useState('');
-  const [loader,setLoading] = useState(true);
+  // const [loader,setLoading] = useState(true);
   
   const [profileData, setProfileData] = useState(
    user?{
@@ -323,10 +326,60 @@ const Profile = () => {
         console.error(err);
       }
     };
-
+  
+    const fetchAnswers = async () => {
+      try {
+        const userId = user._id;
+        const response = await axios.post(`${backend_url}/api/answer/${userId}`);
+        if (response.data.success) {
+          setAnswers(response.data.data);
+        } else {
+          setError('Failed to fetch answers');
+        }
+      } catch (err) {
+        setError('Error fetching answers');
+        console.error(err);
+      }
+    };
+    
     fetchQuestions();
+    fetchAnswers();
   }, [user]);
+  
 
+  // useEffect(() => {
+  //   const fetchQuestions = async () => {
+  //     try {
+  //       const userId = user._id;
+  //       const response = await axios.get(`${backend_url}/api/question/get/${userId}`);
+  //       if (response.data.success) {
+  //         setQuestions(response.data.data.questions);
+  //       } else {
+  //         setError('Failed to fetch questions');
+  //       }
+  //     } catch (err) {
+  //       setError('Error fetching questions');
+  //       console.error(err);
+  //     }
+
+  //   const fetchAnswers = async () => {
+  //     try {
+  //       const userId = user._id;
+  //       const response = await axios.get(`${backend_url}/api/answer/${userId}`);
+  //       if (response.data.success) {
+  //         setAnswers(response.data.data);
+  //       } else {
+  //         setError('Failed to fetch answers');
+  //       }
+  //     } catch (err) {
+  //       setError('Error fetching answers');
+  //       console.error(err);
+  //     }
+  //   }
+    
+  //   fetchQuestions();
+  //   fetchAnswers();
+  // },[user]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -469,20 +522,27 @@ const Profile = () => {
 
         <hr className="border-gray-300 mb-4" />
         <div className="flex justify-between mb-4">
-          <button className="text-purple-600 text-lg font-bold focus:outline-none">4 Questions</button>
-          <button className="text-gray-600 focus:outline-none">2 Answers</button>
+          <button className={`${btnfiels==='questions'?"text-purple-600 font-bold":"text-gray-600"} focus:outline-none`} onClick={()=>{setBtnField('questions')}}>{questions.length} Questions</button>
+
+          <button className={`${btnfiels==='answers'?"text-purple-600 font-bold":"text-gray-600"} text-gray-600 focus:outline-none`} onClick={()=>{setBtnField('answers')}}>{answers.length} Answers</button>
           <button className="text-gray-600 focus:outline-none">Comments</button>
           <button className="text-gray-600 focus:outline-none">Upvotes</button>
         </div>
         <hr className="border-gray-300 mb-4" />
         <h1 className="text-xl font-semibold mb-2">Questions Asked</h1>
       </div>
-      <div className='w-full gap-y-5  mt-3 flex flex-col items-center'>
-      {/* md:w-1/2 */}
+      {btnfiels==='questions'?<div className='w-full gap-y-5  mt-3 flex flex-col items-center'>
         {questions.map((ques,index)=>{
           return <Hero question={ques} key={index}/>
         })}
       </div>
+      :''}
+      {btnfiels==='answers'?<div className='w-full gap-y-5  mt-3 flex flex-col items-center'>
+        {answers.map((answer,index)=>{
+          return <AnswerCard answer={answer} key={index} />
+        })}
+      </div>
+      :''}
     </div>
   );
 };

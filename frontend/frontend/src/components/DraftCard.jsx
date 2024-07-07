@@ -173,9 +173,9 @@ const DraftCard = ({ draft }) => {
   return (
     <div className="relative p-4 bg-white rounded-lg shadow-md w-full md:w-1/2">
       <div className="absolute top-2 left-4 text-gray-600 text-xs">Answer • Unpublished</div>
-      <button className="absolute top-2 right-4 text-gray-500 hover:text-gray-700">
+      {/* <button className="absolute top-2 right-4 text-gray-500 hover:text-gray-700">
         <FaTimes />
-      </button>
+      </button> */}
       <div className="mt-2 mb-4">
         <h2 className="text-lg font-bold">{draft.question_id.body}</h2>
         <p className="text-gray-700 mt-1 font-light leading-5">

@@ -81,6 +81,17 @@ catch(error){
 console.log("Error :",error);
 }
 }
+const getAllAnswersByUserId = async(req,res)=>{
+const {userId} = req.params;
+try{
+  const answers = await answerModel.find({userId:userId});
+  // console.log(answers);
+  res.json({success:true,data:answers});
+}
+catch(error){
+console.log("Error :",error);
+}
+}
 
 // const getQuesByUserId = async(req,res)=>{
 // const {userId} = req.params;
@@ -259,4 +270,4 @@ const downvoteAnswer = async (req, res) => {
 };
 
 
-export {addAnswer,getAllAnswersByQuesId,upvoteAnswer,getUpvoteStatus,downvoteAnswer}
+export {addAnswer,getAllAnswersByQuesId,upvoteAnswer,getUpvoteStatus,downvoteAnswer,getAllAnswersByUserId}

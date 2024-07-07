@@ -51,6 +51,21 @@
 
 import mongoose, { Schema } from "mongoose";
 
+const notificationSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  action: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -93,11 +108,12 @@ const userSchema = new mongoose.Schema(
         ref:'upvoteModel'
        }
     ],
-    notifications:[
+    notifications:
       {
-      type:String
+      type:[notificationSchema],
+      default:[],
       }
-    ],
+  ,
     GoogleLogin: { type: Boolean ,default:false },
   },
   { timestamps: true }

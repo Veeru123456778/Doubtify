@@ -435,7 +435,7 @@ const NavBar = ({ toggleSidebar }) => {
               placeholder="Search for any question"
               value={textInput}
               onChange={handleInputChange}
-              className="pl-7 xl:pl-10 w-50 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+              className="pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
               style={{
                 backgroundImage: `url(${searchIcon})`,
                 backgroundSize: "16px",
