@@ -9,6 +9,7 @@ import answerRouter from "./routes/answerRoutes.js";
 import bookmarkRouter from "./routes/bookmarkRoutes.js";
 import draftRouter from "./routes/draftsRoutes.js";
 import searchrouter from "./routes/searchRoutes.js";
+import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use('/api/answer',answerRouter);
 app.use('/api/bookmark',bookmarkRouter);
 app.use('/api/draft',draftRouter);
 app.use('/api/search',searchrouter);
+app.use('/api/password',resetPasswordRouter);
 // app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {

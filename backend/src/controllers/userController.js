@@ -206,6 +206,25 @@ const getUserInterests =  (async (req, res) => {
   }
 })
 
+const updateUser = async (req, res) => {
+  const { bio } = req.body;
+  const { userId } = req.params;
+
+  try {
+    // Update the user's bio using findByIdAndUpdate method
+    const user = await userModel.findByIdAndUpdate(userId, { bio }, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'Bio updated successfully', user });
+  } catch (error) {
+    // Handle any errors and send an error response
+    console.error('Error updating Bio:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
-export { login_user, register_user, getUserDetails ,updateUserInterests,getUserInterests,getOtherUserInfo,registerByGoogle,login_userGoogle};
+export { login_user, register_user, getUserDetails ,updateUserInterests,getUserInterests,getOtherUserInfo,registerByGoogle,login_userGoogle,updateUser};

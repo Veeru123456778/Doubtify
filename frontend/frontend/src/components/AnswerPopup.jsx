@@ -53,29 +53,10 @@ const AnswerPopup = ({ question, setShowAnswerPopup,draft=null }) => {
         }
       );
       if (response.status === 201) {
-        // try{
-        //   const name = user.firstName;
-        //   const action = "has answered you question."
-        //   const time ="2 hrs ago";
-        //   const notificationData = {
-        //     name: user.firstName, // or the appropriate name field
-        //     action: 'has answered your question',
-        //     time:new Date(),
-        //     question:question
-        //   };
-        //   const response = await axios.post(
-        //     `${backend_url}/api/user/notification/${question.userId}`,
-        //     notificationData);
-        //     if(response.status===200){
-        //       console.log('notification send');
-        //     }
-        // }catch(error){
-        //   console.error('Error adding notification:', error);
-        // }
         try {
           const notificationData = {
-            name: user.firstName, // Ensure this is the correct field
-            action: 'has answered your question',
+            name: user.firstName, 
+            action: 'has answered your question.',
             time: new Date(),
             question: question
           };
