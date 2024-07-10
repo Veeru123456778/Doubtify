@@ -329,36 +329,30 @@ import { toast } from "react-toastify";
 import useFetchUser from "../hooks/useFetchUser";
 import useSpeechToText from "../hooks/useSpeechToText";
 import axios from "axios";
-import Hero from "./Hero";
+import ThemeToggler from "./ThemeToggler";
 
 const NavBar = ({ toggleSidebar }) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const { setToken, setUser, user, token, backend_url } = useContext(
-    UserContext
-  );
+  const { setToken, setUser, user, token, backend_url, isDarkTheme } = useContext(UserContext);
   const loading = useFetchUser(token, setUser);
   const [textInput, setTextInput] = useState("");
-  const { isListening, transcript, startListening, stopListening } =
-    useSpeechToText({ continuous: true });
+  const { isListening, transcript, startListening, stopListening } = useSpeechToText({ continuous: true });
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchTimeout = useRef(null);
 
-  // Effect to update input value based on isListening, textInput, and transcript
   useEffect(() => {
     if (isListening) {
       setTextInput((prevTextInput) => {
-        const space =
-          prevTextInput.length > 0 && transcript.length > 0 ? " " : "";
+        const space = prevTextInput.length > 0 && transcript.length > 0 ? " " : "";
         return transcript;
       });
     }
-  }, [transcript]);
+  }, [transcript, isListening]);
 
-  // Function to start or stop listening
   const startStopListening = () => {
     if (isListening) {
       stopListening();
@@ -368,7 +362,6 @@ const NavBar = ({ toggleSidebar }) => {
     }
   };
 
-  // Function to handle search with debounce
   const handleSearch = (query) => {
     axios
       .get(`${backend_url}/api/search/ques?q=${encodeURIComponent(query)}`)
@@ -382,7 +375,6 @@ const NavBar = ({ toggleSidebar }) => {
       });
   };
 
-  // Debounce function
   const debounce = (func, delay) => {
     clearTimeout(searchTimeout.current);
     searchTimeout.current = setTimeout(() => {
@@ -390,7 +382,6 @@ const NavBar = ({ toggleSidebar }) => {
     }, delay);
   };
 
-  // Handle input change with debouncing
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setTextInput(inputValue);
@@ -422,7 +413,7 @@ const NavBar = ({ toggleSidebar }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between bg-gray-100 p-2 xl:p-4 shadow-md fixed top-0 w-full z-50">
+      <div className={`flex items-center justify-between p-2 xl:p-4 shadow-md fixed top-0 w-full z-50 ${isDarkTheme ? "bg-dark" : "bg-gray-100"}`}>
         <div className="flex justify-between items-center space-x-4">
           <button className="md:hidden" onClick={toggleSidebar}>
             <MenuIcon className="w-5 h-5" />
@@ -435,7 +426,7 @@ const NavBar = ({ toggleSidebar }) => {
               placeholder="Search for any question"
               value={textInput}
               onChange={handleInputChange}
-              className="pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+              className={`pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border ${isDarkTheme ? "border-gray-600 bg-[#858EAC] placeholder-white" : "border-gray-300"} focus:outline-none focus:ring focus:border-blue-300`}
               style={{
                 backgroundImage: `url(${searchIcon})`,
                 backgroundSize: "16px",
@@ -444,7 +435,7 @@ const NavBar = ({ toggleSidebar }) => {
               }}
             />
             <button
-              className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 bg-white focus:outline-none ${
+              className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 focus:outline-none ${
                 isListening ? "bg-red-100" : "bg-white"
               }`}
               onClick={startStopListening}
@@ -463,21 +454,19 @@ const NavBar = ({ toggleSidebar }) => {
                       handleSearch(item.body); // Perform search with suggestion
                     }}
                   >
-          
                     {item.body}
                   </li>
                 ))}
               </ul>
             )}
           </div>
-
+          <ThemeToggler />
           <div className="flex items-center space-x-4 ml-4 flex-shrink-0">
-            <BellIcon
-              className="h-6 w-6 md:h-8 md:w-8 text-gray-700 cursor-pointer"
-              onClick={() => setIsNotificationOpen(true)}
-            />
+            <button onClick={() => setIsNotificationOpen(true)}>
+              {isDarkTheme?<img className="h-6 w-6 md:h-5 md:w-5 text-gray-700 cursor-pointer" src="/bellLight.png" alt="Notifications" />:<img className="h-6 w-6 md:h-5 md:w-5 text-gray-700 cursor-pointer" src="/bell.png" alt="Notifications" />}
+            </button>
             <button
-              className="bg-gradient-to-r from-blue-400 to-blue-600 text-white text-xs md:text-base px-1 py-1 md:px-4 md:py-2 rounded-full hover:from-blue-500 hover:to-blue-700"
+              className="bg-gradient-to-r from-blue-400 to-blue-600 text-white text-xs md:text-base px-1 py-1 md:px-4 md:py-2 rounded-lg hover:from-blue-500 hover:to-blue-700"
               onClick={() => setIsPopupOpen(true)}
             >
               Ask a Question

@@ -2,12 +2,13 @@ import React,{useContext} from 'react';
 import Modal from '../utils/Modal';
 import HeroImage from '../images/hero-image-01.jpg';
 import UserContext from '../context/userContext';
+import landing from '../images/landing.png';
 
 function HeroHome() {
   const {isDarkTheme} = useContext(UserContext);
   return (
     <section>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-screen mt-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-screen mt-16 bg-auto bg-no-repeat	 bg-right" style={{ backgroundImage: `url(${landing})` }}>
         {/* Hero content */}
         <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
           {/* Section header */}

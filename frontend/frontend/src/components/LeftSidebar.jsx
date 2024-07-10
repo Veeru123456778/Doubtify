@@ -8,6 +8,8 @@ import {
   BookmarkIcon,
   TagIcon,
 } from '@heroicons/react/outline';
+import UserContext from '../context/userContext';
+import { useContext } from 'react';
 
 const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const location = useLocation();
@@ -26,6 +28,7 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
     }
   };
 
+  const {isDarkTheme} = useContext(UserContext);
   return (
     <div>
       {isSidebarOpen && (
@@ -35,14 +38,20 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         ></div>
       )}
       <div
-        className={`fixed top-0 left-0 xl:w-64 lg:w-52 md:w-44 md:p-2 h-full bg-gray-200 shadow-lg  p-4 flex flex-col space-y-4 transform transition-transform duration-300 ease-in-out z-40 ${
+        className={ isDarkTheme ? `fixed top-0 left-0 xl:w-64 lg:w-52 md:w-44 md:p-2 h-full bg-dark-200 shadow-sm shadow-slate-200 p-4 flex flex-col space-y-4 transform transition-transform duration-300 ease-in-out z-40 ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }` : `fixed top-0 left-0 xl:w-64 lg:w-52 md:w-44 md:p-2 h-full bg-gray-200 shadow-lg  p-4 flex flex-col space-y-4 transform transition-transform duration-300 ease-in-out z-40 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
         <Link
           to="/home"
           onClick={() => handleButtonClick('/home')}
-          className={`mt-20 flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ?`mt-20 flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/home'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`:`mt-20 flex items-center space-x-2 w-full h-14 ${
             activeButton === '/home'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'
@@ -56,7 +65,11 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <Link
           to="/questions"
           onClick={() => handleButtonClick('/questions')}
-          className={`flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ?`flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/questions'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`: `flex items-center space-x-2 w-full h-14 ${
             activeButton === '/questions'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'
@@ -70,7 +83,11 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <Link
           to="/profile"
           onClick={() => handleButtonClick('/profile')}
-          className={`flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ? `flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/profile'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`:`flex items-center space-x-2 w-full h-14 ${
             activeButton === '/profile'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'
@@ -84,7 +101,11 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <Link
           to="/drafts"
           onClick={() => handleButtonClick('/drafts')}
-          className={`flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ? `flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/drafts'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`: `flex items-center space-x-2 w-full h-14 ${
             activeButton === '/drafts'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'
@@ -98,7 +119,11 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <Link
           to="/bookmarks"
           onClick={() => handleButtonClick('/bookmarks')}
-          className={`flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ? `flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/bookmarks'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`: `flex items-center space-x-2 w-full h-14 ${
             activeButton === '/bookmarks'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'
@@ -112,7 +137,11 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <Link
           to="/categories"
           onClick={() => handleButtonClick('/categories')}
-          className={`flex items-center space-x-2 w-full h-14 ${
+          className={isDarkTheme ?`flex items-center space-x-2 w-full h-14 ${
+            activeButton === '/categories'
+              ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-black rounded-md'
+              : 'bg-transparent text-white'
+          }`:`flex items-center space-x-2 w-full h-14 ${
             activeButton === '/categories'
               ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-md'
               : 'bg-transparent text-black'

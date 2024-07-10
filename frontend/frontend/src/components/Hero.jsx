@@ -14,9 +14,7 @@ import useFetchUser from "../hooks/useFetchUser";
 import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
 
-
 const Hero = ({ stopOnClick, question }) => {
-
   const [showOptions, setShowOptions] = useState(false);
   const [showAnswerPopup, setShowAnswerPopup] = useState(false);
   const [upvotes, setUpvotes] = useState(question.upvotes || 0);
@@ -24,10 +22,9 @@ const Hero = ({ stopOnClick, question }) => {
   const [User, setUsers] = useState("");
   const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
-  const { backend_url, user, token, setUser } = useContext(UserContext);
+  const { backend_url, user, token, setUser, isDarkTheme } = useContext(UserContext);
 
-    const loading = useFetchUser(token, setUser);
-  
+  const loading = useFetchUser(token, setUser);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,13 +61,12 @@ const Hero = ({ stopOnClick, question }) => {
         console.error('Error fetching answers:', error);
       }
     };
-  
+
     fetchAnswers();
     fetchData();
     fetchUpvoteStatus();
-  }, [backend_url,user,question]);
+  }, [backend_url, user, question]);
 
-  
   const handleMoreClick = (e) => {
     e.stopPropagation();
     setShowOptions(!showOptions);
@@ -102,12 +98,8 @@ const Hero = ({ stopOnClick, question }) => {
         userId: user._id
       });
 
-      // console.log("Response:", response);
-
       if (response.data.success) {
         const updatedQuestion = response.data.question;
-        // console.log("Updated Question:", updatedQuestion);
-
         if (updatedQuestion && typeof updatedQuestion.upvotes === 'number') {
           setUpvotes(updatedQuestion.upvotes);
         } else {
@@ -129,11 +121,7 @@ const Hero = ({ stopOnClick, question }) => {
     return `${day}-${month}-${year}`;
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-    if (loading) {
-    // return <div>Loading...</div>;
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-32">
         <TailSpin height="50" width="50" color="#4A90E2" ariaLabel="loading" />
@@ -145,13 +133,11 @@ const Hero = ({ stopOnClick, question }) => {
     return null;
   }
 
-  
   const handleBookmark = async (e) => {
     e.stopPropagation();
     try {
       const response = await axios.post(`${backend_url}/api/bookmark/add`, {
-
-        questionId:question._id,
+        questionId: question._id,
         userId: user._id
       });
 
@@ -167,7 +153,7 @@ const Hero = ({ stopOnClick, question }) => {
     }
   };
 
-    const handleCopyLink = (e) => {
+  const handleCopyLink = (e) => {
     e.stopPropagation();
     const publicUrl = `${window.location.origin}/question/${question._id}`;
     navigator.clipboard.writeText(publicUrl)
@@ -181,7 +167,7 @@ const Hero = ({ stopOnClick, question }) => {
   };
 
   return (
-    <div className="bg-gray-100 xl:p-6 p-4 rounded-lg shadow-lg w-full md:w-1/2 my-4 place-items-center relative">
+    <div className={`xl:p-6 p-4 rounded-lg  shadow-slate-600 shadow-sm w-full md:w-1/2 my-4 place-items-center relative ${isDarkTheme ? `bg-[#1f2530]` : 'bg-gray-100'}`}>
       <button className="absolute top-2 right-2 text-gray-500">
         <FiX size={20} />
       </button>
@@ -191,11 +177,11 @@ const Hero = ({ stopOnClick, question }) => {
             <span className="text-gray-500 text-lg">AS</span>
           </div>
           <div>
-            <h2 className="text-base font-semibold">
+            <h2 className={`text-base font-semibold ${isDarkTheme ? 'text-white' : 'text-black'}`}>
               {User.firstName} {User.lastName}
             </h2>
             <div className="flex gap-x-2">
-              <p className="text-gray-600 text-xs">
+              <p className={isDarkTheme?"text-gray-400 text-xs":"text-gray-600 text-xs"}>
                 Second year BTECH CSE Student
               </p>
               <p className="text-gray-500 text-[11px] font-thin">
@@ -205,25 +191,25 @@ const Hero = ({ stopOnClick, question }) => {
           </div>
         </div>
         <div>
-          <h3 className="text-base font-medium mb-2 w-full">{question.body}</h3>
+          <h3 className={`text-base  font-medium mb-2 w-full ${isDarkTheme ?"text-white":"text-black"}`}>{question.body}</h3>
 
           {question.files.map((file) => (
             <img src={file} alt="image" key={file} className="mt-3 mb-3" />
           ))}
 
-          <p className="text-gray-500 text-[11px] font-normal mb-1 ml-2" onClick={handleComponentClick}>
-           {answers.length} {answers.length===1?"Answer":"Answers"}
+          <p className={`${isDarkTheme ? 'text-gray-200':'text-gray-500'} text-[11px] font-normal mb-1 ml-2`} onClick={handleComponentClick}>
+            {answers.length} {answers.length === 1 ? "Answer" : "Answers"}
           </p>
           <div className="flex flex-row items-center justify-between sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center mb-2 sm:mb-0">
               <button
                 onClick={handleAnswerClick}
-                className="text-blue-600 mr-4 px-4 py-2 bg-blue-100 rounded-lg"
+                className="text-blue-600 mr-2 px-4 py-1 bg-blue-100 rounded-lg"
               >
                 Answer
               </button>
               <button
-                className={`flex items-center text-green-600 px-4 py-2 bg-green-100 rounded-lg mr-4 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
+                className={`flex items-center text-green-600 px-4 py-1 bg-green-100 rounded-lg mr-2 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
                 onClick={handleUpvotes}
               >
                 <FiArrowUp className={`mr-1 ${isUpvote ? 'text-white' : ''}`} />{upvotes}
@@ -251,12 +237,12 @@ const Hero = ({ stopOnClick, question }) => {
         </div>
       </div>
       {showAnswerPopup && <AnswerPopup setShowAnswerPopup={setShowAnswerPopup} question={question} />}
-      {/* {showAnswerPopup && <AnswerPopup onClose={closeAnswerPopup} setShowAnswerPopup={setShowAnswerPopup} question={question} />} */}
     </div>
   );
 };
 
 export default Hero;
+
 
 
 // import React, { useState, useEffect, useContext } from "react";

@@ -213,7 +213,7 @@ function SignIn() {
                           Sign in with Google
                         </span>
                       </button> */}
-                      <GoogleLogin onSuccess={(response)=>{getUser(response)}} onError={()=>{console.log("Error")}}/>
+                      <GoogleLogin width={375} onSuccess={(response)=>{getUser(response)}} onError={()=>{console.log("Error")}}/>
                     </div>
                   </div>
                 </form>

@@ -5,16 +5,16 @@ import useFetchUser from '../hooks/useFetchUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-
-const AnswerCard = ({ answer,question }) => {
+const AnswerCard = ({ answer, question }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [Users, setUsers] = useState("");
-  const { backend_url, user, token, setUser } = useContext(UserContext);
   const [isUpvote, setIsUpvote] = useState(false);
   const [isDownvote, setIsDownvote] = useState(false);
   const [upvotes, setUpvotes] = useState(answer.upvotes || 0);
   const [downVotes, setDownvotes] = useState(answer.downVotes || 0);
-
+  
+  const { backend_url, user, token, setUser, isDarkTheme } = useContext(UserContext);
+  
   const loading = useFetchUser(token, setUser);
 
   useEffect(() => {
@@ -63,18 +63,14 @@ const AnswerCard = ({ answer,question }) => {
         userId: user._id
       });
 
-      // console.log("Response:", response);
-
       if (response.data.success) {
         const updatedAnswer = response.data.answer;
-        // console.log("Updated Answer:", updatedAnswer);
-
         if (updatedAnswer && typeof updatedAnswer.upvotes === 'number') {
           setUpvotes(updatedAnswer.upvotes);
-          setIsUpvote(!isUpvote); // Toggle isUpvote state
+          setIsUpvote(!isUpvote);
           if (isDownvote) {
             setDownvotes(updatedAnswer.downVotes);
-            setIsDownvote(false); // Reset downvote state if upvote is clicked
+            setIsDownvote(false);
           }
         } else {
           console.error("Unexpected API response structure:", response.data);
@@ -95,18 +91,14 @@ const AnswerCard = ({ answer,question }) => {
         userId: user._id
       });
 
-      // console.log("Response:", response);
-
       if (response.data.success) {
         const updatedAnswer = response.data.answer;
-        // console.log("Updated Answer:", updatedAnswer);
-
         if (updatedAnswer && typeof updatedAnswer.downVotes === 'number') {
           setDownvotes(updatedAnswer.downVotes);
-          setIsDownvote(!isDownvote); // Toggle isDownvote state
+          setIsDownvote(!isDownvote);
           if (isUpvote) {
             setUpvotes(updatedAnswer.upvotes);
-            setIsUpvote(false); // Reset upvote state if downvote is clicked
+            setIsUpvote(false);
           }
         } else {
           console.error("Unexpected API response structure:", response.data);
@@ -123,13 +115,12 @@ const AnswerCard = ({ answer,question }) => {
     setShowOptions(!showOptions);
   };
 
-  
   const handleBookmark = async (e) => {
     e.stopPropagation();
     try {
       const response = await axios.post(`${backend_url}/api/bookmark/add`, {
         answerId: answer._id,
-        questionId:question._id,
+        questionId: question._id,
         userId: user._id
       });
 
@@ -148,7 +139,7 @@ const AnswerCard = ({ answer,question }) => {
     try {
       const response = await axios.post(`${backend_url}/api/bookmarks/remove`, {
         answerId: answer._id,
-        questionId:question._id,
+        questionId: question._id,
         userId: user._id
       });
 
@@ -183,7 +174,7 @@ const AnswerCard = ({ answer,question }) => {
   };
 
   return (
-    <div className="bg-gray-100 xl:p-6 p-4 rounded-lg shadow-lg md:w-1/2 w-full my-4 place-items-center relative">
+    <div className={`xl:p-6 p-4 rounded-lg shadow-slate-600 shadow-sm md:w-1/2 w-full my-4 place-items-center relative ${isDarkTheme ? 'bg-[#1f2530]' : 'bg-gray-100'}`}>
       <button className="absolute top-2 right-2 text-gray-500">
         <FiX size={20} />
       </button>
@@ -192,15 +183,15 @@ const AnswerCard = ({ answer,question }) => {
           <span className="text-gray-500 text-lg">AS</span>
         </div>
         <div>
-          <h2 className="text-base font-semibold">{Users.firstName} {Users.lastName}</h2>
-          <div className='flex gap-x-2'> 
-            <p className="text-gray-600 text-xs">Second year BTECH CSE Student</p>
+          <h2 className={`text-base font-semibold ${isDarkTheme?'text-white':'text-black'}`}>{Users.firstName} {Users.lastName}</h2>
+          <div className='flex gap-x-2'>
+            <p className={isDarkTheme?"text-gray-400 text-xs":"text-gray-600 text-xs"}>Second year BTECH CSE Student</p>
             <p className="text-gray-500 text-[11px] font-thin">{formatDate(answer.createdAt)}</p>
           </div>
         </div>
       </div>
       <div>
-        <h3 className="text-base font-extralight mb-2">{answer.body}</h3>
+        <h3 className={`text-base font-extralight mb-2 ${isDarkTheme?'text-white':'text-black'}`}>{answer.body}</h3>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
@@ -227,6 +218,9 @@ const AnswerCard = ({ answer,question }) => {
                 </button>
                 <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleBookmark}>
                   <FiBookmark className="mr-2" /> Bookmark
+                </button>
+                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleRemoveBookmark}>
+                  <FiBookmark className="mr-2" /> Remove Bookmark
                 </button>
               </div>
             )}
