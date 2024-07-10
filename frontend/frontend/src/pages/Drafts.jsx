@@ -39,7 +39,7 @@ const Drafts = () => {
      if(!user){
       return null;
      }
-  return <div className='gap-y-8 flex flex-col w-full items-center'>
+  return <div className='gap-y-8 flex flex-col h-full w-full items-center'>
     {/* <div className="sticky top-0 bg-white   p-4">
         <div className="flex  mb-6">
           <h1 className="text-2xl font-bold ">Drafts</h1>

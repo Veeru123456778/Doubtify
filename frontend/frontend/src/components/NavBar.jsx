@@ -427,6 +427,7 @@ import { toast } from "react-toastify";
 import useFetchUser from "../hooks/useFetchUser";
 import useSpeechToText from "../hooks/useSpeechToText";
 import axios from "axios";
+import ThemeToggler from "./ThemeToggler";
 
 const NavBar = ({ toggleSidebar }) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -435,7 +436,7 @@ const NavBar = ({ toggleSidebar }) => {
   const [isMicrophonePopupOpen, setIsMicrophonePopupOpen] = useState(false); // State for MicrophonePopup
   const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false); // State for LogoutPopup
   const navigate = useNavigate();
-  const { setToken, setUser, user, token, backend_url } = useContext(UserContext);
+  const { setToken, setUser, user, token, backend_url, isDarkTheme } = useContext(UserContext);
   const loading = useFetchUser(token, setUser);
   const [textInput, setTextInput] = useState("");
   const { isListening, transcript, startListening, stopListening } = useSpeechToText({ continuous: true });
@@ -520,7 +521,7 @@ const NavBar = ({ toggleSidebar }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between bg-gray-100 p-2 xl:p-4 shadow-md fixed top-0 w-full z-50">
+      <div className={`flex items-center justify-between p-2 xl:p-4 shadow-md fixed top-0 w-full z-50 ${isDarkTheme ? "bg-dark" : "bg-gray-100"}`}>
         <div className="flex justify-between items-center space-x-4">
           <button className="md:hidden" onClick={toggleSidebar}>
             <MenuIcon className="w-5 h-5" />
@@ -533,7 +534,7 @@ const NavBar = ({ toggleSidebar }) => {
               placeholder="Search for any question"
               value={textInput}
               onChange={handleInputChange}
-              className="pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+              className={`pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border ${isDarkTheme ? "border-gray-600 bg-[#858EAC] placeholder-white" : "border-gray-300"} focus:outline-none focus:ring focus:border-blue-300`}
               style={{
                 backgroundImage: `url(${searchIcon})`,
                 backgroundSize: "16px",
@@ -542,7 +543,7 @@ const NavBar = ({ toggleSidebar }) => {
               }}
             />
             <button
-              className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 bg-white focus:outline-none ${
+              className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 focus:outline-none ${
                 isListening ? "bg-red-100" : "bg-white"
               }`}
               onClick={startStopListening}
@@ -567,16 +568,13 @@ const NavBar = ({ toggleSidebar }) => {
               </ul>
             )}
           </div>
-
+          <ThemeToggler />
           <div className="flex items-center space-x-4 ml-4 flex-shrink-0">
-            <BellIcon
-              className="h-5 w-5 md:h-7 md:w-7   cursor-pointer"
-              onClick={() => setIsNotificationOpen(true)}
-            />
-            <span className="bg-blue-500 rounded-full w-2 h-2 absolute mb-4 mr-2"></span>
-            {/* text-gray-700 */}
+            <button onClick={() => setIsNotificationOpen(true)}>
+              {isDarkTheme?<img className="h-6 w-6 md:h-5 md:w-5 text-gray-700 cursor-pointer" src="/bellLight.png" alt="Notifications" />:<img className="h-6 w-6 md:h-5 md:w-5 text-gray-700 cursor-pointer" src="/bell.png" alt="Notifications" />}
+            </button>
             <button
-              className="bg-gradient-to-r from-blue-400 to-blue-600 text-white text-xs md:text-base px-1 py-1 md:px-4 md:py-2 rounded-full hover:from-blue-500 hover:to-blue-700"
+              className="bg-gradient-to-r from-blue-400 to-blue-600 text-white text-xs md:text-base px-1 py-1 md:px-4 md:py-2 rounded-lg hover:from-blue-500 hover:to-blue-700"
               onClick={() => setIsPopupOpen(true)}
             >
               Ask a Question

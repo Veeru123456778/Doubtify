@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from '../context/userContext';
 import { toast } from 'react-toastify';
+import DropdownComponent from './DropdownComponent';
 
 const AskQuestionPopup = ({ onClose }) => {
   const [category, setCategory] = useState('');
@@ -80,17 +81,18 @@ const AskQuestionPopup = ({ onClose }) => {
       toast.error('Failed to add question. Please try again.');
     }
   };
+  const {isDarkTheme} = useContext(UserContext);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-4/5 md:w-3/5 relative ">
+      <div className={`${isDarkTheme? 'bg-[#1f2530]':'bg-white '} shadow-slate-700 shadow-md p-6  w-11/12 sm:w-4/5 md:w-3/5 relative `}>
         <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 ">
           &#10005;
         </button>
-        <h2 className="text-xl font-semibold mb-8 text-center">Add Question</h2>
+        <h2 className={`${isDarkTheme?' text-white text-xl font-semibold mb-8 text-center':' text-black text-xl font-semibold mb-8 text-center'}`}>Add Question</h2>
         <div className="mb-4">
           <textarea
-            className="w-full border border-gray-300 p-2 rounded resize-none overflow-auto"
+            className={`w-full border border-gray-300 p-2 rounded resize-none overflow-auto ${isDarkTheme? 'bg-[#858EAC] placeholder-white':'bg-white'}`}
             rows={rows}
             placeholder="Start typing your question..."
             value={question}
@@ -98,7 +100,7 @@ const AskQuestionPopup = ({ onClose }) => {
             style={{ lineHeight: '24px' }}
           />
         </div>
-        <div className='flex-col sm:flex sm:flex-row gap-3'>
+        {/* <div className='flex-col sm:flex sm:flex-row gap-3'>
         <div className="mb-4">
           <select
             className="w-48 border border-gray-300 p-2 rounded"
@@ -123,7 +125,8 @@ const AskQuestionPopup = ({ onClose }) => {
             ))}
           </select>
         </div>
-        </div>
+        </div> */}
+        <DropdownComponent />
         <div className="flex items-center justify-between mt-6">
           <label className="flex items-center">
             <input type="file" className="hidden" multiple onChange={handleFileChange} />
