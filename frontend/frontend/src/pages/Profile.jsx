@@ -302,6 +302,8 @@ const Profile = () => {
   const [btnfiels,setBtnField] = useState('questions');
   const [error,setError] = useState('');
   // const [loader,setLoading] = useState(true);
+  const {isDarkTheme} = useContext(UserContext);
+
   
   const [profileData, setProfileData] = useState(
    user?{
@@ -448,12 +450,12 @@ const Profile = () => {
     setIsModalOpen(false);
   };
 
- 
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <InterestModal isOpen={isModalOpen} onClose={closeModal} userId={user._id} />
 
-      <div className="md:w-1/2 w-full mt-5 p-4 bg-white rounded-lg ">
+      <div className={`md:w-1/2 w-full mt-5 p-4 shadow-slate-600 shadow-sm rounded-lg ${isDarkTheme?'bg-[#1f2530]':'bg-white'}`}>
         <div className="flex md:flex items-center  mb-4">
           <img
             src={user.profile_picture}
@@ -461,7 +463,7 @@ const Profile = () => {
             className="w-24 h-24 rounded-full mr-6"
           />
           <div className="flex-1">
-            <h1 className="text-2xl font-bold">{user.firstName} {user.lastName}</h1>
+            <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>{user.firstName} {user.lastName}</h1>
             {editProfile ? (
               <input
                 type="text"
@@ -472,7 +474,7 @@ const Profile = () => {
                 placeholder="Edit your course information"
               />
             ) : (
-              <p className="text-gray-600 cursor-pointer" onClick={() => setEditProfile(true)}>
+              <p className={` cursor-pointer ${isDarkTheme?'text-gray-300':'text-gray-600'}` }onClick={() => setEditProfile(true)}>
                 {user.course ? user.course : 'Add your course information'}
               </p>
             )}
@@ -489,7 +491,7 @@ const Profile = () => {
           </button>
         </div>
         <hr className="border-gray-300 mb-4" />
-        <p className="text-gray-700 mb-4">
+        <p className={` mb-4 ${isDarkTheme?'text-gray-300':'text-gray-700'}`}>
           {editDescription ? (
             <input
               type="text"
@@ -504,7 +506,7 @@ const Profile = () => {
           )}
         </p>
         <div className='flex justify-between'>
-          <h1 className="text-xl font-semibold mb-2">Area of Interest</h1>
+          <h1 className={`text-xl font-semibold mb-2 ${isDarkTheme?'text-white':'text-black'}`}>Area of Interest</h1>
           <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600" onClick={openModal}>
             <FaEdit className="mr-2" /> Edit
           </button>
@@ -522,14 +524,14 @@ const Profile = () => {
 
         <hr className="border-gray-300 mb-4" />
         <div className="flex justify-between mb-4">
-          <button className={`${btnfiels==='questions'?"text-purple-600 font-bold":"text-gray-600"} focus:outline-none`} onClick={()=>{setBtnField('questions')}}>{questions.length} Questions</button>
+          <button className={`${btnfiels==='questions'?"text-purple-600 font-bold":""} ${isDarkTheme?'text-gray-300':'text-gray-600'} focus:outline-none`} onClick={()=>{setBtnField('questions')}}>{questions.length} Questions</button>
 
-          <button className={`${btnfiels==='answers'?"text-purple-600 font-bold":"text-gray-600"} text-gray-600 focus:outline-none`} onClick={()=>{setBtnField('answers')}}>{answers.length} Answers</button>
-          <button className="text-gray-600 focus:outline-none">Comments</button>
-          <button className="text-gray-600 focus:outline-none">Upvotes</button>
+          <button className={`${btnfiels==='answers'?"text-purple-600 font-bold":""}  ${isDarkTheme?'text-gray-300':'text-gray-600'} focus:outline-none`} onClick={()=>{setBtnField('answers')}}>{answers.length} Answers</button>
+          <button className={` focus:outline-none  ${isDarkTheme?'text-gray-300':'text-gray-600'}`}>Comments</button>
+          <button className={` focus:outline-none  ${isDarkTheme?'text-gray-300':'text-gray-600'}`}>Upvotes</button>
         </div>
         <hr className="border-gray-300 mb-4" />
-        <h1 className="text-xl font-semibold mb-2">Questions Asked</h1>
+        <h1 className={`text-xl font-semibold mb-2 ${isDarkTheme ? 'text-white':'text-black'}`}>Questions Asked</h1>
       </div>
       {btnfiels==='questions'?<div className='w-full gap-y-5  mt-3 flex flex-col items-center'>
         {questions.map((ques,index)=>{
