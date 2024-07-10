@@ -27,7 +27,7 @@ const LeftSidebar = ({ isSidebarOpen, toggleSidebar }) => {
       toggleSidebar(); // Close sidebar on mobile after clicking a link
     }
   };
-
+   
   const {isDarkTheme} = useContext(UserContext);
   return (
     <div>

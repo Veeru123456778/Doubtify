@@ -176,6 +176,11 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  // useEffect(() => {
+  //   const bodyClass = document.body.classList;
+  //   isDarkTheme ? bodyClass.add('dark') : bodyClass.remove('dark');
+  // }, [isDarkTheme]);
+
   
   useEffect(() => {
     AOS.init({

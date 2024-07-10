@@ -285,9 +285,9 @@ const Hero = ({ stopOnClick, question }) => {
   const [showAnswerPopup, setShowAnswerPopup] = useState(false);
   const [upvotes, setUpvotes] = useState(question.upvotes || 0);
   const [isUpvote, setIsUpvote] = useState(false);
-  // const [User, setuser] = useState({});
+  const [User, setUsers] = useState({});
   const [answers, setAnswers] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [load, setLoading] = useState(true);
   const navigate = useNavigate();
   const { backend_url, user, token, setUser, isDarkTheme } = useContext(UserContext);
 
@@ -298,7 +298,7 @@ const Hero = ({ stopOnClick, question }) => {
       try {
         const response = await axios.post(`${backend_url}/api/user/otheruserInfo`, { user_Id: question.userId });
         if (response.data.success) {
-          setUser(response.data.user);
+          setUsers(response.data.user);
         }
       } catch (error) {
         console.error("Error Finding User Info:", error);
@@ -392,14 +392,14 @@ const Hero = ({ stopOnClick, question }) => {
   // if (loading) {
   //   return <div>Loading...</div>;
   // }
-    if (loading) {
-    // return <div>Loading...</div>;
-    return (
-      <div className="flex justify-center items-center h-32">
-        <TailSpin height="50" width="50" color="#4A90E2" ariaLabel="loading" />
-      </div>
-    );
-  }
+  //   if (loading) {
+  //   // return <div>Loading...</div>;
+  //   return (
+  //     <div className="flex justify-center items-center h-32">
+  //       <TailSpin height="50" width="50" color="#4A90E2" ariaLabel="loading" />
+  //     </div>
+  //   );
+  // }
 
   if (!user) {
     return null;
@@ -440,11 +440,11 @@ const Hero = ({ stopOnClick, question }) => {
   };
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-32">
-        <TailSpin height={50} width={50} color="#4A90E2" ariaLabel="loading" />
-      </div>
-    );
+    // return (
+    //   <div className="flex justify-center items-center h-32">
+    //     <TailSpin height={50} width={50} color="#4A90E2" ariaLabel="loading" />
+    //   </div>
+    // );
   }
 
   if (!user) {
@@ -470,8 +470,8 @@ const Hero = ({ stopOnClick, question }) => {
         <div className="flex items-center mb-4">
           <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center mr-4">
             <span className="text-gray-500 text-lg">
-              {/* {User.firstName && User.firstName.charAt(0)}
-              {User.lastName && User.lastName.charAt(0)} */}
+              {User.firstName && User.firstName.charAt(0)}
+              {User.lastName && User.lastName.charAt(0)}
             </span>
           </div>
           <div>

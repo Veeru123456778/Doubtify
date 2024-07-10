@@ -9,7 +9,7 @@ const Answer = () => {
   const [answers,setAnswers] = useState([]);
     const location = useLocation();
     const {question} = location.state;
-const {backend_url}=useContext(UserContext);
+const {backend_url,isDarkTheme}=useContext(UserContext);
    
 useEffect(() => {
   const fetchAnswers = async () => {

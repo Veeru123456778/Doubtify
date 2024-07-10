@@ -282,13 +282,15 @@ import { FiChevronDown } from 'react-icons/fi';
 import Hero from '../components/Hero';
 import axios from 'axios';
 import UserContext from '../context/userContext';
+import { TailSpin } from 'react-loader-spinner';
 
 const Questions = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('Select Filter');
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
-  const { backend_url } = useContext(UserContext);
+  const [loading,setLoading] = useState(true);
+  const { backend_url,isDarkTheme } = useContext(UserContext);
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
@@ -308,6 +310,7 @@ const Questions = () => {
           const questionsWithAnswers = await fetchAnswersForQuestions(response.data.data);
           setQuestions(questionsWithAnswers); // Update questions state with fetched data
           applyFilter(selectedFilter, questionsWithAnswers); // Apply initial filter
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error displaying questions:', error);
@@ -334,7 +337,7 @@ const Questions = () => {
 
   const applyFilter = (filter, questionsToFilter = questions) => {
     let sortedQuestions = [...questionsToFilter];
-
+    setLoading(true);
     switch (filter) {
       case 'Recommended':
         // Implement your recommended sorting or filtering logic here
@@ -352,14 +355,23 @@ const Questions = () => {
         break;
     }
 
-    setFilteredQuestions([...sortedQuestions]); // Update filteredQuestions state with sorted array
+    setFilteredQuestions([...sortedQuestions]);
+    setLoading(false); // Update filteredQuestions state with sorted array
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <TailSpin color="#00BFFF" height={80} width={80} />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full p-6 flex flex-col items-center">
       <div className="w-full md:w-1/2">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">All Questions</h1>
+          <h1 className={`${isDarkTheme?'text-white':'text-black'} text-2xl font-bold`}>All Questions</h1>
           <div className="relative">
             <button
               onClick={handleFilterClick}

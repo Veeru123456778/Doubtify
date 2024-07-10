@@ -38,12 +38,10 @@ if (loading) {
 
 
   return <div className='flex flex-col justify-center items-center'>
+      <h1 className={`${isDarkTheme?'text-white':'text-black'} text-2xl font-bold`}>Search Results :</h1>
     {questions.map((ques, index) => (
           <Hero question={ques} key={index} />
         ))}
-     {/* <Hero classname="mt-[50px]" />
-     <Hero classname="mt-[50px]" />
-     <Hero classname="mt-[50px]" /> */}
   </div>;
 };
 

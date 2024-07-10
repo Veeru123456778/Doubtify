@@ -5,7 +5,7 @@ import useFetchUser from '../hooks/useFetchUser';
 import axios from 'axios';
 
 const Drafts = () => {
-  const {backend_url,token,user,setUser} = useContext(UserContext);
+  const {backend_url,token,user,setUser,isDarkTheme} = useContext(UserContext);
   const loading =  useFetchUser(token,setUser);
   const [drafts,setDrafts] = useState([]);
   
@@ -47,7 +47,7 @@ const Drafts = () => {
         <hr className="border-gray-300 mb-8" />
       </div> */}
       <div className='w-full md:w-1/2 mt-4'>
-        <h1 className='text-2xl font-bold'>My Drafts</h1>
+        <h1 className={`${isDarkTheme?'text-white':'text-black'} text-2xl font-bold`}>My Drafts</h1>
         <hr className='mt-3 border-gray-300'/>
       </div>
     <div className='gap-y-8 flex flex-col justify-center items-center w-full '>
