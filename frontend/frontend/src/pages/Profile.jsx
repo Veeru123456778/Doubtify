@@ -557,6 +557,7 @@ import InterestModal from '../components/InterestModal';
 import axios from 'axios';
 import Hero from '../components/Hero';
 import AnswerCard from '../components/AnswerCard';
+import { TailSpin } from 'react-loader-spinner';
 
 const Profile = () => {
   const { setUser, token, user, backend_url } = useContext(UserContext);
@@ -686,7 +687,14 @@ const Profile = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+ 
+if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <TailSpin color="#00BFFF" height={80} width={80} />
+    </div>
+  );
+}
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <InterestModal isOpen={isModalOpen} onClose={closeModal} userId={user._id} />

@@ -39,8 +39,8 @@ const AskQuestionPopup = ({ onClose }) => {
     setFiles(Array.from(e.target.files));
   };
 
-  const categories = Array.from({ length: 10 }, (_, i) => `Category ${i + 1}`);
-  const subCategories = Array.from({ length: 10 }, (_, i) => `Sub-Category ${i + 1}`);
+  // const categories = Array.from({ length: 10 }, (_, i) => `Category ${i + 1}`);
+  // const subCategories = Array.from({ length: 10 }, (_, i) => `Sub-Category ${i + 1}`);
 
   
   // const handleAddQuestion = async () => {
@@ -126,7 +126,7 @@ const AskQuestionPopup = ({ onClose }) => {
           </select>
         </div>
         </div> */}
-        <DropdownComponent />
+        <DropdownComponent category={category} subCategory={subCategory} setCategory={setCategory} setSubCategory={setSubCategory}/>
         <div className="flex items-center justify-between mt-6">
           <label className="flex items-center">
             <input type="file" className="hidden" multiple onChange={handleFileChange} />

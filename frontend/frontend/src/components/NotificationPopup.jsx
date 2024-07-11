@@ -69,8 +69,8 @@ const NotificationPopup = ({ onClose }) => {
 
         </div>
         {notifications.length===0?<div className='flex flex-col items-center'>
-        <p>You have no notifications!</p>
-        <img src='/noNotification.png' className=' mb-5 w-86 h-80'/>
+        <p className={` ${isDarkTheme?'text-gray-400':'text-gray-500'}`}>You have no notifications!</p>
+        <img src='/image.png' className='mb-5 w-88 h-80'/>
         </div>:''}
       </div>
     </div>

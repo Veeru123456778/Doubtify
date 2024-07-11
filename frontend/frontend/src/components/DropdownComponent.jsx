@@ -3,11 +3,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from "../context/userContext";
 
-const DropdownComponent = () => {
+const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) => {
+
     const [categories, setCategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedSubcategory, setSelectedSubcategory] = useState('');
+    // const [category, setCategory] = useState('');
+    // const [subCategory, setSubCategory] = useState('');
     const [loadingCategories, setLoadingCategories] = useState(true);
     const [loadingSubcategories, setLoadingSubcategories] = useState(false);
     const [error, setError] = useState(null);
@@ -30,10 +31,10 @@ const DropdownComponent = () => {
 
     useEffect(() => {
         const fetchSubcategories = async () => {
-            if (selectedCategory) {
+            if (category) {
                 setLoadingSubcategories(true);
                 try {
-                    const response = await axios.get(`http://localhost:3000/api/category/subcategories/${selectedCategory}`);
+                    const response = await axios.get(`http://localhost:3000/api/category/subcategories/${category}`);
                     setSubcategories(response.data);
                     setLoadingSubcategories(false);
                 } catch (error) {
@@ -46,7 +47,7 @@ const DropdownComponent = () => {
         };
 
         fetchSubcategories();
-    }, [selectedCategory]);
+    }, [category]);
 
     return (
         <div className="flex-col sm:flex sm:flex-row gap-6 2xl:w-12">
@@ -60,14 +61,14 @@ const DropdownComponent = () => {
                     ) : (
                         <select
                             id="category"
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
                             className={`block appearance-none w-64 xl:w-80 2xl:w-96 border border-gray-400 hover:border-gray-500 p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#858EAC] text-white' : 'bg-white'}`}
                         >
                             <option value="">Select a category</option>
-                            {categories.map((category) => (
-                                <option key={category} value={category}>
-                                    {category}
+                            {categories.map((Category) => (
+                                <option key={Category} value={Category}>
+                                    {Category}
                                 </option>
                             ))}
                         </select>
@@ -85,10 +86,10 @@ const DropdownComponent = () => {
                     ) : (
                         <select
                             id="subcategory"
-                            value={selectedSubcategory}
-                            onChange={(e) => setSelectedSubcategory(e.target.value)}
+                            value={subCategory}
+                            onChange={(e) => setSubCategory(e.target.value)}
                             className={`block appearance-none w-64 xl:w-80 2xl:w-96 border border-gray-400 hover:border-gray-500 p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#858EAC] text-white' : 'bg-white'}`}
-                            disabled={!selectedCategory}
+                            disabled={!category}
                         >
                             <option value="">Select a subcategory</option>
                             {subcategories.map((subcategory) => (

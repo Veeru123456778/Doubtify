@@ -465,6 +465,34 @@ const NavBar = ({ toggleSidebar }) => {
     }
   };
 
+  useEffect(() => {
+    setShowSuggestions(false); // Close suggestions dropdown on component mount
+  }, []);
+
+  useEffect(() => {
+    if (!textInput.trim()) {
+      setShowSuggestions(false);
+      return;
+    }
+  
+    debounce(() => {
+      handleSearch(textInput.trim());
+    }, 200);
+  }, [textInput]);
+  
+  // const handleSearch = (query) => {
+  //   axios
+  //     .get(`${backend_url}/api/search/ques?q=${encodeURIComponent(query)}`)
+  //     .then((response) => {
+  //       setSuggestions(response.data);
+  //       setShowSuggestions(true);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error searching:", error);
+  //       // Handle error, show toast message, etc.
+  //     });
+  // };
+
   const handleSearch = (query) => {
     axios
       .get(`${backend_url}/api/search/ques?q=${encodeURIComponent(query)}`)
@@ -477,6 +505,7 @@ const NavBar = ({ toggleSidebar }) => {
         // Handle error, show toast message, etc.
       });
   };
+  
 
   const debounce = (func, delay) => {
     clearTimeout(searchTimeout.current);
@@ -518,12 +547,22 @@ const NavBar = ({ toggleSidebar }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
+  // const handleKeyPress = (event) => {
+  //   if (event.key === 'Enter') {
+  //    navigate(`/search?query=${textInput}`,{state:suggestions});
+  //   //  setSuggestions([]);
+  //   }
+  // };
+
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-     navigate(`/search?query=${textInput}`,{state:suggestions});
-     setSuggestions([]);
+    if (event.key === 'Enter' && textInput.trim() !== '') {
+      // handleSearch(textInput.trim());
+      setShowSuggestions(false); 
+      setTextInput('');
+      navigate('/search', { state: { suggestions } }); 
     }
   };
+  
 
   return (
     <div>
