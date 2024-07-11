@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import {useLocation} from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
 import Hero from '../components/Hero';
 import axios from 'axios';
@@ -8,7 +9,9 @@ const DetailedCategory = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('Select Filter');
   const [questions, setQuestions] = useState([]);
-  const { backend_url } = useContext(UserContext);
+  const { backend_url,isDarkTheme } = useContext(UserContext);
+  const location = useLocation();
+  const {category} = location.state;
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
@@ -39,7 +42,7 @@ const DetailedCategory = () => {
     <div className="w-full p-6 flex flex-col items-center">
       <div className="w-full md:w-1/2">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">Category</h1>
+          <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>{category}</h1>
           <div className="relative">
             <button
               onClick={handleFilterClick}

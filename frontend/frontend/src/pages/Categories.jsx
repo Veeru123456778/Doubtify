@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import searchIcon from '../assets/search.png'; // Ensure the path is correct
 import CategoryCard from '../components/CategoryCard';
 import UserContext from '../context/userContext';
-import { useContext } from 'react';
 
 const Categories = () => {
   const {isDarkTheme} = useContext(UserContext);
-
   return (
     <div className="w-full h-screen  p-6 flex flex-col items-center">
       {/* <div className="sticky top-0 bg-white z-20  p-4">
@@ -29,7 +27,7 @@ const Categories = () => {
        */}
         <div className='md:w-1/2 w-full'>
         <div className="flex justify-between items-start">
-          <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>Categories</h1>
+          <h1 className={`${isDarkTheme ? 'text-white' : 'text-black'}  text-2xl font-bold`}>Categories</h1>
           <input
             type="text"
             placeholder="Search"

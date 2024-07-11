@@ -10,7 +10,7 @@ const CategoryCard = ({ category, count }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/detailedCategory`);
+    navigate(`/detailedCategory`,{state:{category}});
   };
 
   return (
