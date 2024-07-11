@@ -200,7 +200,7 @@ const Bookmarks = () => {
   const [selectedFilter, setSelectedFilter] = useState('Select Filter');
   const [questions, setQuestions] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
-  const { backend_url, user, setUser, token } = useContext(UserContext);
+  const { backend_url, user, setUser, token,isDarkTheme } = useContext(UserContext);
   const loading = useFetchUser(token, setUser);
 
   const handleFilterClick = () => {
@@ -277,10 +277,10 @@ const Bookmarks = () => {
   }
 
   return (
-    <div className="w-full p-6 flex flex-col items-center">
+    <div className={`w-full p-6 flex flex-col items-center ${isDarkTheme?'bg-dark':'bg-white'}`}>
       <div className="w-full md:w-1/2">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-bold">My Bookmarks</h1>
+          <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>My Bookmarks</h1>
           <div className="relative">
             <button
               onClick={handleFilterClick}
@@ -321,12 +321,12 @@ const Bookmarks = () => {
       <div className="flex flex-col justify-center items-center w-full">
         {bookmarks.length === 0 && (<div className='items-center'>
           <p className="mt-4 text-gray-600">You have no bookmarks yet.</p>
-          <img src='/noBookmark.png' alt=''  />
+          
           </div>
         )}
 
         {bookmarks.map((bookmark, index) => (
-          <div key={index} className="flex flex-col items-center w-full">
+          <div key={index} className={`flex flex-col items-center w-full  ${isDarkTheme?'bg-dark':'bg-white'}`}>
             {bookmark.questionId ? (
               <>
                 <Hero question={bookmark.questionId} />

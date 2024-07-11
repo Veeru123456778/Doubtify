@@ -144,6 +144,8 @@ const DraftCard = ({ draft }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showAnswerPopup, setShowAnswerPopup] = useState(false);
+  const {isDarkTheme} = useContext(UserContext);
+
 
   console.log('Draft IDD: ', draft._id);
 
@@ -171,14 +173,14 @@ const DraftCard = ({ draft }) => {
   };
   
   return (
-    <div className="relative p-4 bg-white rounded-lg shadow-md w-full md:w-1/2">
-      <div className="absolute top-2 left-4 text-gray-600 text-xs">Answer • Unpublished</div>
+  <div className={`relative p-4  rounded-lg shadow-slate-600 shadow-sm w-full md:w-1/2 ${isDarkTheme ? 'bg-[#1f2530]' : 'bg-white'}`}>
+      <div className={`absolute top-2 left-4  text-xs ${isDarkTheme?'text-gray-300':'text-gray-600'}`}>Answer • Unpublished</div>
       {/* <button className="absolute top-2 right-4 text-gray-500 hover:text-gray-700">
         <FaTimes />
       </button> */}
       <div className="mt-2 mb-4">
-        <h2 className="text-lg font-bold">{draft.question_id.body}</h2>
-        <p className="text-gray-700 mt-1 font-light leading-5">
+        <h2 className={`text-lg font-bold ${isDarkTheme?'text-white':'text-black'}`}>{draft.question_id.body}</h2>
+        <p className={` mt-1 font-light leading-5 ${isDarkTheme?'text-gray-300':'text-gray-700'}`}>
           {draft.body}
         </p>
       </div>

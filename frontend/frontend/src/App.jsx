@@ -164,6 +164,7 @@ import Landing from './pages/landing.jsx'
 import UserContext from './context/userContext.js';
 import {GoogleOAuthProvider} from '@react-oauth/google';
 import ResetPassword from './pages/ResetPassword.jsx';
+import CommentsPage from './pages/comments.jsx';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -174,6 +175,11 @@ function App() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  // useEffect(() => {
+  //   const bodyClass = document.body.classList;
+  //   isDarkTheme ? bodyClass.add('dark') : bodyClass.remove('dark');
+  // }, [isDarkTheme]);
 
   
   useEffect(() => {
@@ -193,7 +199,7 @@ function App() {
 
 
   // Correct condition to check if the current path is /, /signin or /signup
-  const isAuthPage = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup' || location.pathname.startsWith('/question/') || location.pathname.startsWith('/reset-password');
+  const isAuthPage = location.pathname === '/' || location.pathname === '/signin' || location.pathname === '/signup' || (location.pathname.startsWith('/question/') &&  !location.pathname.includes('/comments')) || location.pathname.startsWith('/reset-password');
 
   return (
  
@@ -219,6 +225,8 @@ function App() {
             <Route path="/home/answer" element={<Answer />} />
             <Route path="/question/:id" element={<PublicQuestion />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/question/:questionId/answer/:answerId/comments" element={<CommentsPage />} />
+
           </Routes>
         </div>
         {!isAuthPage && <RightSidebar className="w-1/4" />}

@@ -17,6 +17,11 @@ const UserContextProvider = ({ children }) => {
      setIsDarkTheme(prevTheme => !prevTheme);
      localStorage.setItem('theme', isDarkTheme ? 'light' : 'dark');
    };
+
+   useEffect(() => {
+    document.body.classList.toggle('bg-dark', isDarkTheme);
+    document.body.classList.toggle('bg-white', !isDarkTheme);
+  }, [isDarkTheme]);
  
    useEffect(()=>{
    const theme = localStorage.getItem('theme');

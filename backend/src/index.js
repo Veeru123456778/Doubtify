@@ -9,7 +9,9 @@ import answerRouter from "./routes/answerRoutes.js";
 import bookmarkRouter from "./routes/bookmarkRoutes.js";
 import draftRouter from "./routes/draftsRoutes.js";
 import searchrouter from "./routes/searchRoutes.js";
+import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
 import categoryRouter from './routes/categoryRoutes.js'; // Import the new router
+import router from "./routes/categoryRoutes.js";
 
 
 
@@ -41,9 +43,7 @@ app.use('/api/answer',answerRouter);
 app.use('/api/bookmark',bookmarkRouter);
 app.use('/api/draft',draftRouter);
 app.use('/api/search',searchrouter);
-app.use('/api/category', categoryRouter); // Use the new router
-
-
+app.use('/api/category',router);
 // app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {

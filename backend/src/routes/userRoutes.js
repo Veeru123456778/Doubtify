@@ -7,7 +7,8 @@ import {
   updateUserInterests,
   getUserInterests,
   getOtherUserInfo,
-  login_userGoogle
+  login_userGoogle,
+  updateUser
 } from "../controllers/userController.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import authMiddleware from "../middlewares/authentication.js";
@@ -22,6 +23,7 @@ userRouter.post("/signinGoogle", login_userGoogle);
 userRouter.get("/userInfo", authMiddleware, getUserDetails); 
 userRouter.post("/otheruserInfo", getOtherUserInfo); 
 userRouter.put('/:userId/interests', updateUserInterests);
+userRouter.put('/:userId/bio', updateUser);
 userRouter.get('/:userId/interests', getUserInterests);
 userRouter.post('/notification/:userId',notifications);
 

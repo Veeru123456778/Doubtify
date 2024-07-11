@@ -94,7 +94,8 @@ const userSchema = new mongoose.Schema(
       ]
   ,
     bio:{
-      type:String
+      type:String,
+      default:''
     },
     comments:[
       {
