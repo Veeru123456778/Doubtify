@@ -505,7 +505,7 @@ const Hero = ({ stopOnClick, question }) => {
               </div>
             ))}
 
-          <p className={`${isDarkTheme ? 'text-gray-200':'text-gray-500'} text-[11px] font-normal mb-1 ml-2`} onClick={handleComponentClick}>
+          <p className={`${isDarkTheme ? 'text-gray-200':'text-gray-500'} text-[11px] font-normal mb-1 ml-2 relative z-10`} onClick={handleComponentClick}>
             {answers.length} {answers.length === 1 ? "Answer" : "Answers"}
           </p>
           <div className="flex flex-row items-center justify-between sm:flex-row sm:items-center sm:justify-between">

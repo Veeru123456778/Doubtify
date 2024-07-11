@@ -518,6 +518,12 @@ const NavBar = ({ toggleSidebar }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+     navigate(`/search?query=${textInput}`,{state:suggestions});
+     setSuggestions([]);
+    }
+  };
 
   return (
     <div>
@@ -541,6 +547,7 @@ const NavBar = ({ toggleSidebar }) => {
                 backgroundPosition: "8px center",
                 backgroundRepeat: "no-repeat",
               }}
+              onKeyPress={handleKeyPress}
             />
             <button
               className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 focus:outline-none ${

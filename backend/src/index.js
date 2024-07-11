@@ -12,8 +12,7 @@ import searchrouter from "./routes/searchRoutes.js";
 import resetPasswordRouter from "./routes/resetPasswordRoutes.js";
 import categoryRouter from './routes/categoryRoutes.js'; // Import the new router
 import router from "./routes/categoryRoutes.js";
-
-
+import commentRoutes from "./routes/commentRoutes.js";
 
 dotenv.config();
 
@@ -44,6 +43,8 @@ app.use('/api/bookmark',bookmarkRouter);
 app.use('/api/draft',draftRouter);
 app.use('/api/search',searchrouter);
 app.use('/api/category',router);
+app.use('/api/comments', commentRoutes);
+
 // app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {

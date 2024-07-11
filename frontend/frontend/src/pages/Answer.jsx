@@ -29,7 +29,7 @@ useEffect(() => {
     return <div className='flex flex-col items-center'>
        <Hero stopOnClick={true} question={question}/>
       <div className=" w-full md:w-1/2 flex flex-col">
-      <h1 className="text-2xl font-bold mb-4 mt-8">All Answers</h1>
+      <h1 className={`${isDarkTheme ? 'text-white' : 'text-black'} text-2xl font-bold mb-4 mt-8`}>All Answers</h1>
       <hr className="border-gray-300 mb-8 " />
       </div >
       <div className=" flex flex-col gap-y-4 w-full items-center">

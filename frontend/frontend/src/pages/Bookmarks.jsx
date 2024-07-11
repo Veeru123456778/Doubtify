@@ -329,7 +329,7 @@ const Bookmarks = () => {
           <div key={index} className={`flex flex-col items-center w-full  ${isDarkTheme?'bg-dark':'bg-white'}`}>
             {bookmark.questionId ? (
               <>
-                <Hero question={bookmark.questionId} />
+                <Hero question={bookmark.questionId}  />
                 {bookmark.answerId && (
                   <AnswerCard answer={bookmark.answerId} question={bookmark.questionId} />
                 )}

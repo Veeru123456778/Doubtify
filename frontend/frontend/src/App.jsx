@@ -165,6 +165,8 @@ import UserContext from './context/userContext.js';
 import {GoogleOAuthProvider} from '@react-oauth/google';
 import ResetPassword from './pages/ResetPassword.jsx';
 import CommentsPage from './pages/comments.jsx';
+import SearchPage from './pages/searchPage.jsx';
+import DetailedCategory from './pages/DetailedCategory.jsx';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -225,7 +227,10 @@ function App() {
             <Route path="/home/answer" element={<Answer />} />
             <Route path="/question/:id" element={<PublicQuestion />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/question/:questionId/answer/:answerId/comments" element={<CommentsPage />} />
+            <Route path="/detailedCategory" element={<DetailedCategory />} />
+            
 
           </Routes>
         </div>
