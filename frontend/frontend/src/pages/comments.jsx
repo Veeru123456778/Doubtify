@@ -4,6 +4,8 @@ import UserContext from "../context/userContext";
 import axios from "axios";
 import AnswerCard from "../components/AnswerCard";
 import Hero from "../components/Hero";
+import { FaReply } from "react-icons/fa6";
+
 
 const CommentsPage = () => {
   const location = useLocation();
@@ -176,7 +178,7 @@ const CommentsPage = () => {
           >
             {/* {replyingToCommentId === comment._id ? 'Cancel Reply' : 'Reply'} */}
             {showReplies && replyingToCommentId === comment._id ? (
-              <p>Hide Reply</p>
+              <p>cancel</p>
             ) : (
               <p>Reply</p>
             )}
@@ -187,16 +189,15 @@ const CommentsPage = () => {
             {!isReplyingToReplying && !activeReplyId && (
               <form onSubmit={(e) => handleAddReply(e, comment._id)}>
                 <textarea
-                  className="w-full p-2 border rounded-lg"
-                  placeholder="Add a reply..."
+className={`w-full p-2 border rounded-lg ${isDarkTheme ?'border-[#404b5a] bg-[#323B4A] placeholder-[#E0E0E0] text-[#E0E0E0]':''}`}                  placeholder="Add a reply..."
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                 />
                 <button
                   type="submit"
-                  className="mt-2 px-2 py-1 bg-blue-600 text-white rounded-lg"
+                  className={`"mt-2 px-2 py-0 bg-blue-600 text-white rounded-lg"`}
                 >
-                  Add Reply
+                 Reply
                 </button>
               </form>
             )}
@@ -209,7 +210,7 @@ const CommentsPage = () => {
               {replies.map((childComment) => (
                 <div
                   key={childComment._id}
-                  className="p-2 bg-gray-200 rounded-lg mb-2"
+                  className={`p-2  rounded-lg mb-2 ${isDarkTheme ?'border-[#404b5a] bg-[#323B4A] placeholder-[#E0E0E0] text-[#E0E0E0]':'bg-gray-200'}`}
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex gap-2 items-center">
@@ -219,21 +220,23 @@ const CommentsPage = () => {
                         className="h-4 w-4 text-gray-500 rounded-full border-1 bg-gray-300 align-middle"
                       />
 
-                      <span className="text-gray-500">
+                      <span className={` ${isDarkTheme ?'text-gray-200':'text-gray-500'}`}>
                         {childComment.user_id.firstName}{" "}
                         {childComment.user_id.lastName}
                       </span>
                     </div>
-                    <span className="text-xs text-gray-400">
+                    <span className={`text-xs  ${isDarkTheme ?'text-gray-100':'text-gray-400'}`}>
                       {formatDate(childComment.createdAt)}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <p className="text-xs text-gray-700">{childComment.body}</p>
+                    <p className={`text-xs  ${isDarkTheme ?'text-gray-200':'text-gray-700'}`}>{childComment.body}</p>
 
                     {/* {childComment.user_id===user._id ?'': <button onClick={()=>handleReplyToReply(childComment._id,childComment.user_id)}>Reply child</button>} */}
                     {childComment.user_id !== user._id && (
                       <button
+                      className={`"mt-2 px-1 py-0 bg-blue-600 text-white rounded-lg"`}
+
                         onClick={() =>
                           handleReplyToReply(
                             childComment._id,
@@ -241,8 +244,9 @@ const CommentsPage = () => {
                           )
                         }
                       >
-                        Reply child
+                        Reply
                       </button>
+                      
                     )}
                   </div>
 
@@ -250,7 +254,7 @@ const CommentsPage = () => {
                   {activeReplyId == childComment._id && (
                     <form onSubmit={(e) => handleAddReply(e, comment._id)}>
                       <textarea
-                        className="w-full p-2 border rounded-lg"
+                        className={`w-full p-2 border rounded-lg ${isDarkTheme ?'border-[#404b5a] bg-[#323B4A] placeholder-[#E0E0E0] text-[#E0E0E0]':''}`}
                         placeholder="Add a reply..."
                         value={replyText}
                         onChange={(e) => setReplyText(e.target.value)}
@@ -259,7 +263,8 @@ const CommentsPage = () => {
                         type="submit"
                         className="mt-2 px-2 py-1 bg-blue-600 text-white rounded-lg"
                       >
-                        Add Reply
+                      {/* add reply */}
+                        Reply
                       </button>
                     </form>
                   )}
@@ -285,7 +290,7 @@ const CommentsPage = () => {
       <div className="mt-6 w-1/2">
         <form onSubmit={handleAddComment} className="mb-4">
           <textarea
-            className="w-full p-2 border rounded-lg"
+            className={`w-full p-2 border rounded-lg ${isDarkTheme ? ' border-[#404b5a] bg-[#323B4A] placeholder-[#E0E0E0] text-[#E0E0E0]':''} `}
             placeholder="Add a comment..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
@@ -294,7 +299,7 @@ const CommentsPage = () => {
             type="submit"
             className="mt-2 px-2 py-1 bg-blue-600 text-white rounded-lg"
           >
-            Add Comment
+           Comment
           </button>
         </form>
 

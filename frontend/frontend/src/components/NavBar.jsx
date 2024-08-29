@@ -136,6 +136,8 @@ const NavBar = ({ toggleSidebar }) => {
     <div>
       <div className={`flex items-center justify-between p-2 xl:p-4 shadow-md fixed top-0 w-full z-50 ${isDarkTheme ? "bg-dark" : "bg-gray-100"}`}>
         <div className="flex justify-between items-center space-x-4">
+        <img src="/logo.png" alt="" className="md:h-10 h-6 " />
+
           <button className="md:hidden" onClick={toggleSidebar}>
             <MenuIcon className="w-5 h-5" />
           </button>
