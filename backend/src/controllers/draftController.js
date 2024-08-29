@@ -57,23 +57,10 @@ const removeDraft = async(req,res)=>{
   }
 }
 
-// const UpdateDraft = async(req,res)=>{
-//  const { question_id, body, user_id } = req.body.data;
-//   console.log(question_id," ",user_id);
-//   try {
-//     let draft = await draftModel.findByIdAndUpdate({ question_id,user_id },{body});
-//     res.status(200).json({ success: true, message: 'Draft updated successfully' ,draft});
-//     } 
-//    catch (error) {
-//     console.error('Error updating/creating draft:', error);
-//     res.status(500).json({ success: false, message: 'Server error' });
-//   }
-// }
 const UpdateDraft = async (req, res) => {
-  const { question_id, user_id, body } = req.body.data; // Assuming data is structured like this
+  const { question_id, user_id, body } = req.body.data; 
 
   try {
-      // Convert question_id and user_id to ObjectId
       const draft = await draftModel.findOneAndUpdate(
           { 
               question_id, 

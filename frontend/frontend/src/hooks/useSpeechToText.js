@@ -16,7 +16,6 @@ const useSpeechToText = ({ continuous }) => {
         recognition.onerror = handleError;
         recognition.onend = () => setIsListening(false);
       }
-  
       recognition.start();
       setIsListening(true);
     };

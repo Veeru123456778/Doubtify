@@ -10,13 +10,15 @@ const Home = () => {
   const [questions, setQuestions] = useState([]);
 const { backend_url } = useContext(UserContext);
 const [loading,setLoading] = useState(true);
+const [page,setPage] = useState(1);
 
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${backend_url}/api/question/questions`);
+      const response = await axios.get(`${backend_url}/api/question/questions?page=${page}`);
       if (response.data.success) {
-        setQuestions(response.data.data);
+        const quesResponse = response.data.data;
+        setQuestions([...questions,...quesResponse]);
         setLoading(false);
         console.log(response.data);
       }
@@ -26,7 +28,19 @@ useEffect(() => {
   };
 
   fetchData();
-}, [backend_url]);
+}, [backend_url,page]);
+
+useEffect(()=>{
+  window.addEventListener('scroll',handleScroll);
+
+  return ()=>window.removeEventListener('scroll',handleScroll);
+},[])
+
+const handleScroll = ()=>{
+  if(window.innerHeight+window.scrollY>=document.body.scrollHeight-2){
+    setPage(prevPage=>prevPage+1);
+  }
+}
 
 if (loading) {
   return (
@@ -41,9 +55,6 @@ if (loading) {
     {questions.map((ques, index) => (
           <Hero question={ques} key={index} />
         ))}
-     {/* <Hero classname="mt-[50px]" />
-     <Hero classname="mt-[50px]" />
-     <Hero classname="mt-[50px]" /> */}
   </div>;
 };
 

@@ -3,12 +3,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// const categories = {
-//     "Electronics": ["Mobile","Laptop","Tablet"],
-//     "Furniture": ["Chair", "Table", "Couch"],
-//     "Clothing": ["Shirt", "Pants", "Jacket"]
-// };
-
 const categories ={
     "Algorithms": ["Approximation Algorithms", "Backtracking", "Computational Geometry", "Divide and Conquer", "Dynamic Programming", "Graph Algorithms", "Greedy Algorithms", "Network Flow Algorithms", "Parallel Algorithms", "Randomized Algorithms", "Searching Algorithms", "Sorting Algorithms", "String Algorithms"],
     "Artificial Intelligence": ["AI Algorithms", "AI Ethics", "AI in Finance", "AI in Healthcare", "AI Tools and Frameworks", "Computer Vision", "Deep Learning", "Expert Systems", "Machine Learning", "Natural Language Processing", "Neural Networks", "Reinforcement Learning", "Robotics"],

@@ -36,7 +36,6 @@ const SearchPage = () => {
       {questions && questions.length > 0 ? (
         questions.map((ques, index) => (
            <Hero question={ques} key={index} />
-          // Replace Hero with your component that displays each question
         ))
       ) : (
         <p className="text-lg">

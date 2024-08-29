@@ -6,8 +6,6 @@ const answerRouter = express.Router();
 
 answerRouter.post('/:userId/:questionId/add',upload.array('files'),addAnswer);
 answerRouter.get('/:quesId',getAllAnswersByQuesId);
-// answerRouter.post('/upvote',upvoteAnswer);
-// answerRouter.post('/upvoteStatus',getUpvoteStatus);
 answerRouter.post('/upvote', upvoteAnswer);
 answerRouter.post('/downvote', downvoteAnswer);
 answerRouter.post('/voteStatus', getUpvoteStatus);

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "start:ws": "nodemon websocketServer.js"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,8 @@
     "nodemon": "^3.1.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "validator": "^13.12.0"
+    "socket.io": "^4.7.5",
+    "validator": "^13.12.0",
+    "ws": "^8.18.0"
   }
 }

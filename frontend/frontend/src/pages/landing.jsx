@@ -40,14 +40,10 @@ function Home() {
         {/* Page sections */}
         <HeroHome openVideoModal={openVideoModal} />
         <FeaturesBlocks />
-        {/* <FeaturesZigZag /> */}
-        {/* <Testimonials /> */}
-        {/* <Newsletter /> */}
+    
         
       </main>
-      {/* <Banner /> */}
       
-      {/* Site footer */}
       <Video />
       <Footer />
     </div>

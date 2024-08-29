@@ -39,24 +39,11 @@ const AskQuestionPopup = ({ onClose }) => {
     setFiles(Array.from(e.target.files));
   };
 
-  // const categories = Array.from({ length: 10 }, (_, i) => `Category ${i + 1}`);
-  // const subCategories = Array.from({ length: 10 }, (_, i) => `Sub-Category ${i + 1}`);
-
-  
-  // const handleAddQuestion = async () => {
-  //   const formData = new FormData();
-  //   formData.append('body', question);
-  //   formData.append('categories', category);
-  //   formData.append('subCategories', subCategory);
-  //   files.forEach((file, index) => {
-  //     formData.append('files', file);
-  //   });
-
     const handleAddQuestion = async () => {
     const formData = new FormData();
     formData.append('body', question);
-    formData.append('category', category); // Changed from 'categories' to 'category'
-    formData.append('subCategory', subCategory); // Changed from 'subCategories' to 'subCategory'
+    formData.append('category', category); 
+    formData.append('subCategory', subCategory); 
     files.forEach((file, index) => {
       formData.append('files', file);
     });
@@ -100,32 +87,7 @@ const AskQuestionPopup = ({ onClose }) => {
             style={{ lineHeight: '24px' }}
           />
         </div>
-        {/* <div className='flex-col sm:flex sm:flex-row gap-3'>
-        <div className="mb-4">
-          <select
-            className="w-48 border border-gray-300 p-2 rounded"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">Categories</option>
-            {categories.map((cat, index) => (
-              <option key={index} value={cat}>{cat}</option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-4">
-          <select
-            className="w-48 border border-gray-300 p-2 rounded"
-            value={subCategory}
-            onChange={(e) => setSubCategory(e.target.value)}
-          >
-            <option value="">Sub-Categories</option>
-            {subCategories.map((subCat, index) => (
-              <option key={index} value={subCat}>{subCat}</option>
-            ))}
-          </select>
-        </div>
-        </div> */}
+      
         <DropdownComponent category={category} subCategory={subCategory} setCategory={setCategory} setSubCategory={setSubCategory}/>
         <div className="flex items-center justify-between mt-6">
           <label className="flex items-center">

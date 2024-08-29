@@ -7,8 +7,6 @@ const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) =>
 
     const [categories, setCategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
-    // const [category, setCategory] = useState('');
-    // const [subCategory, setSubCategory] = useState('');
     const [loadingCategories, setLoadingCategories] = useState(true);
     const [loadingSubcategories, setLoadingSubcategories] = useState(false);
     const [error, setError] = useState(null);

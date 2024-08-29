@@ -18,16 +18,6 @@ dotenv.config();
 
 const app = express();
 
-// app.use(session({
-//   secret: process.env.SESSION_SECRET || 'your-session-secret',
-//   resave: false,
-//   saveUninitialized: true
-// }));
-
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 const port = process.env.PORT || 3000;
 connectDB();
 
@@ -54,3 +44,4 @@ app.get("/", (req, res) => {
 app.listen(port, (req, res) => {
   console.log(`Listening on port ${port}`);
 });
+

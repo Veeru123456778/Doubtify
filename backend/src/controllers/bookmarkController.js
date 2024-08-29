@@ -1,5 +1,5 @@
 // Import necessary modules
-import bookmarkModel from '../models/bookmarksModel.js'; // Corrected file name
+import bookmarkModel from '../models/bookMarksModel.js'; // Corrected file name
 import answerModel from '../models/answerModel.js'; // Corrected model name
 import questionModel from '../models/questionModel.js';
 
@@ -48,20 +48,6 @@ const removeBookmark = async (req, res) => {
     }
 };
 
-// Controller function to get bookmarks
-// const getBookmarks = async (req, res) => {
-//     const { userId } = req.body;
-
-//     try {
-//         // Find bookmarks for the specified user and populate the referenced models
-//         const bookmarks = await bookmarkModel.find({ userId }).populate('answerId questionId');
-
-//         return res.json({ success: true, bookmarks });
-//     } catch (error) {
-//         console.error("Error retrieving bookmarks:", error);
-//         return res.status(500).json({ success: false, message: 'Internal server error' });
-//     }
-// };
 
 const getBookmarks = async (req, res) => {
     const { userId } = req.params;

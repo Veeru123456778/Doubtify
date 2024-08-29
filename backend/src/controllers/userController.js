@@ -114,10 +114,6 @@ const register_user = async (req, res) => {
 const registerByGoogle = async (req,res)=>{
   const { firstName, lastName, email, profile_picture, GoogleLogin } = req.body;
   try {
-    // Validate email
-    // if (!validator.isEmail(email)) {
-    //   return res.status(400).json({ success: false, message: "Email is not valid" });
-    // }
     
         // Check if user already exists
     const userExist = await userModel.findOne({ email });
@@ -130,7 +126,7 @@ const registerByGoogle = async (req,res)=>{
       lastName:lastName,
       profile_picture:profile_picture,
       GoogleLogin:GoogleLogin,
-      // password:'1234'
+    
     });
 
     // Save the user to the database

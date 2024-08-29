@@ -18,7 +18,3 @@ const downvoteModel = mongoose.model('downvoteModel',DownvotesSchema);
 
 export default downvoteModel;
 
-  // questionId:{
-    //     type:Schema.Types.ObjectId,
-    //     ref:'QuestionModel',
-    // },
