@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { BellIcon, MenuIcon, MicrophoneIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
+import searchDark from '../assets/searchDark.png'
+
 import AskQuestionPopup from "./AskQuestionPopup";
 import NotificationPopup from "./NotificationPopup";
 import MicrophonePopup from "./MicrophonePopup"; // Import the MicrophonePopup component
@@ -140,14 +142,14 @@ const NavBar = ({ toggleSidebar }) => {
         </div>
         <div className="flex items-center">
           <div className="relative flex-grow">
-            <input
+          <input
               type="text"
               placeholder="Search for any question"
               value={textInput}
               onChange={handleInputChange}
-              className={`pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border ${isDarkTheme ? "border-gray-600 bg-[#858EAC] placeholder-white" : "border-gray-300"} focus:outline-none focus:ring focus:border-blue-300`}
+              className={`pl-7 xl:pl-10 w-40 sm:w-full xl:w-96 pr-12 py-1 xl:py-2 rounded-full border ${isDarkTheme ? "text-[#E0E0E0] border-[#404b5a] bg-[#323B4A] placeholder-[#E0E0E0]" : "border-gray-300"} focus:outline-none focus:ring focus:border-blue-300`}
               style={{
-                backgroundImage: `url(${searchIcon})`,
+                backgroundImage: `url(${isDarkTheme? searchDark : searchIcon  })`,
                 backgroundSize: "16px",
                 backgroundPosition: "8px center",
                 backgroundRepeat: "no-repeat",

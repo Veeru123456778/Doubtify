@@ -1,11 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ThemeToggler from './ThemeToggler';
 
 function Header({ toggleTheme, theme }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('');
+
   const trigger = useRef(null);
   const mobileNav = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/signin':
+        setActiveLink('signin');
+        break;
+      case '/signup':
+        setActiveLink('signup');
+        break;
+      default:
+        setActiveLink('');
+    }
+  }, [location.pathname]);
+
 
   // Close the mobile menu on click outside
   useEffect(() => {
@@ -27,6 +44,10 @@ function Header({ toggleTheme, theme }) {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   }, [mobileNavOpen]);
+  const handleClick = (linkName) => {
+    setActiveLink(linkName);
+  };
+
 
   return (
     <header className="absolute w-full z-30">
@@ -48,10 +69,26 @@ function Header({ toggleTheme, theme }) {
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link to="/signin" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+              <Link
+                  to="/signin"
+                  className={`font-medium px-4 py-3 flex items-center transition duration-150 ease-in-out mr-2 ${
+                    activeLink === 'signin' ? 'bg-purple-700 text-white' : 'text-purple-600 hover:bg-purple-500 hover:text-white'
+                  }`}
+                  onClick={() => handleClick('signin')}
+                >
+                  Sign in
+                </Link>
               </li>
               <li>
-                <Link to="/signup" className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3">Sign up</Link>
+              <Link
+                  to="/signup"
+                  className={`font-medium px-4 py-3 flex items-center transition duration-150 ease-in-out ${
+                    activeLink === 'signup' ? 'bg-purple-700 text-white' : 'bg-transparent text-purple-600 hover:bg-purple-500 hover:text-white'
+                  }`}
+                  onClick={() => handleClick('signup')}
+                >
+                  Sign up
+                </Link>
               </li>
               <li>
           
