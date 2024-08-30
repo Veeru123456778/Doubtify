@@ -10,7 +10,9 @@ Modal.setAppElement('#root'); // This is important for accessibility
 const InterestModal = ({ isOpen, onClose, userId }) => {
   const [availableInterests, setAvailableInterests] = useState([]);
   const [selectedInterests, setSelectedInterests] = useState([]);
-  const { backend_url } = useContext(UserContext);
+  // const { backend_url } = useContext(UserContext);
+  const { isDarkTheme,backend_url } = useContext(UserContext);
+
   
   useEffect(() => {
     if (isOpen) {
@@ -70,12 +72,19 @@ const InterestModal = ({ isOpen, onClose, userId }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Select Interests"
-      className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto mt-20"
-      // overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      className={` p-6 rounded-lg shadow-md w-full max-w-lg mx-auto mt-20 ${isDarkTheme ? 'bg-[#1f2530]':'bg-white'}`}
+      
+  overlayClassName={{
+    base: `fixed inset-0 flex justify-center items-center ${isDarkTheme ? 'bg-[#1f2530]/60' : 'bg-gray-200/60'}`, // Added this line
+    afterOpen: '',
+    beforeClose: ''
+  }}
+  
+
     >
     <div className='flex justify-between'>
-      <h2 className="text-xl font-semibold mb-4">Select Your Areas of Interest</h2>
-      <p className='cursor-pointer text-2xl' onClick={()=>onClose()}>&times;</p>
+      <h2 className={`text-xl font-semibold mb-4 ${isDarkTheme ?'text-white':''}`}>Select Your Areas of Interest</h2>
+      <p className={`cursor-pointer text-2xl ${isDarkTheme ?'text-white':''} `} onClick={()=>onClose()}>&times;</p>
       </div>
       <div className="mb-4">
         {selectedInterests.length > 0 && (
@@ -94,12 +103,12 @@ const InterestModal = ({ isOpen, onClose, userId }) => {
           </div>
         )}
       </div>
-      <h2 className="text-xl font-semibold mb-4">Popular Areas</h2>
+      <h2 className={`text-xl font-semibold mb-4 ${isDarkTheme ?'text-white':''}`}>Popular Areas</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {availableInterests.map((interest, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-2 border rounded-lg cursor-pointer bg-gray-100"
+            className={`flex items-center justify-between p-2 border rounded-lg cursor-pointer  ${isDarkTheme ?'bg-[#323B4A] text-white border-[#404b5a]':'bg-gray-100'}`}
             onClick={() => toggleInterest(interest)}
           >
             <span>{interest}</span>
