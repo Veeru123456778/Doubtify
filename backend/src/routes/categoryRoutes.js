@@ -1,5 +1,6 @@
 // backend/src/routes/categoryRoutes.js
 import express from 'express';
+import { fetchCategories, getCategoryWithQuestions } from '../controllers/categoryController.js';
 
 const router = express.Router();
 
@@ -58,6 +59,7 @@ const categories ={
     "Wireless Networks": ["5G Networks", "Ad Hoc Networks", "Bluetooth", "Cellular Networks", "IoT and Wireless Networks", "Mobile Networks", "Wireless Communication Technologies", "Wireless Network Applications", "Wireless Network Planning", "Wireless Network Protocols", "Wireless Network Security", "Wireless Sensor Networks", "Wi-Fi"]
 }
 
+
 router.get('/categories', (req, res) => {
     res.json(Object.keys(categories));
 });
@@ -68,4 +70,6 @@ router.get('/subcategories/:category', (req, res) => {
     res.json(subcategories);
 });
 
+router.get('/getCategories',fetchCategories);
+router.get('/getCategory/:categoryId',getCategoryWithQuestions);
 export default router;

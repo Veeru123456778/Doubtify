@@ -1,9 +1,11 @@
 // src/components/RightSidebar.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserContext from '../context/userContext';
 import { useContext } from 'react';
+import { fetchCategories } from '../api/categoryApi';
+
 const RightSidebar = () => {
-  const {isDarkTheme} = useContext(UserContext);
+  const {isDarkTheme,backend_url} = useContext(UserContext);
 
   return (
     <div className={isDarkTheme ?"hidden md:p-1 md:block xl:w-64 lg:w-52 md:w-44 fixed top-16 right-0 h-full bg-dark shadow-slate-700	shadow-md p-4 flex flex-col space-y-2   ": " xl:w-64 lg:w-52 md:w-44 hidden md:p-1 md:block fixed top-16 right-0 h-full bg-[#F5F2FF] shadow-lg p-4 flex flex-col space-y-2 "}>

@@ -22,8 +22,11 @@ const CommentsPage = () => {
   const handleReplyToReply = (ReplyToWhomId, firstName) => {
     if (activeReplyId === ReplyToWhomId) {
       setActiveReplyId(null); // Close if the same reply is clicked again
+      setReplyText('');
+      setNewComment('');
     } else {
       setActiveReplyId(ReplyToWhomId);
+      setReplyText('');
       setReplyText(`@${firstName} `); // Prefill the reply with the username
     }
   };
@@ -89,7 +92,7 @@ const CommentsPage = () => {
   const handleAddReply = async (e, parentCommentId) => {
     e.preventDefault();
     if (!replyText.trim()) return;
-
+    
     try {
       const response = await axios.post(`${backend_url}/api/comments/add`, {
         answer_id: answer._id,
@@ -116,7 +119,7 @@ const CommentsPage = () => {
       }
     } catch (error) {
       console.error("Error adding reply:", error);
-    }
+    } 
   };
 
   const formatDate = (dateString) => {
@@ -125,6 +128,8 @@ const CommentsPage = () => {
   };
 
   const handleShowReply = (id) => {
+    setReplyText('');
+    setActiveReplyId(null);
     if (replyingToCommentId === id) {
       setShowReplies((prev) => !prev);
     } else {
@@ -182,7 +187,7 @@ const CommentsPage = () => {
             )}
           </button>
         </div>
-        {replyingToCommentId === comment._id && showReplies && (
+        {comment.user_id._id!==user._id && replyingToCommentId === comment._id && showReplies && (
           <div className="mt-2">
             {!isReplyingToReplying && !activeReplyId && (
               <form onSubmit={(e) => handleAddReply(e, comment._id)}>
@@ -232,7 +237,7 @@ const CommentsPage = () => {
                     <p className="text-xs text-gray-700">{childComment.body}</p>
 
                     {/* {childComment.user_id===user._id ?'': <button onClick={()=>handleReplyToReply(childComment._id,childComment.user_id)}>Reply child</button>} */}
-                    {childComment.user_id !== user._id && (
+                    {childComment.user_id._id !== user._id && (
                       <button
                         onClick={() =>
                           handleReplyToReply(

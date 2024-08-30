@@ -349,17 +349,18 @@ import fs from 'fs';
 import questionModel from '../models/questionModel.js'; // Adjust path as needed
 import upvoteModel from '../models/upvotesModel.js'; // Adjust path as needed
 import uploadOnCloud from '../Utils/cloudinary.js'; // Adjust path as needed
+import categoryModel from '../models/categoryModel.js';
 
 // Add a question
 const addQuestion = async (req, res) => {
   const { userId } = req.params;
-  const { body, category, subCategory } = req.body;
+  const { body ,categoryId} = req.body;
   const files = req.files;
 
-  if (!userId || !body || !category || !subCategory) {
+  if (!userId || !body || !categoryId ) {
     return res.status(400).json({ message: "Incomplete data provided" });
   }
-
+   
   let filesArray = [];
   if (files) {
     await Promise.all(files.map(async (file) => {
@@ -384,12 +385,18 @@ const addQuestion = async (req, res) => {
     const question = new questionModel({
       userId: userId,
       body: body,
-      category: category,
-      subCategory: subCategory,
+      categoryId: categoryId,
       files: filesArray
     });
 
     await question.save();
+
+    await categoryModel.findOneAndUpdate(
+      { _id:categoryId },
+      { $inc: { count: 1 }, $push: { questions: question._id } },
+      { new: true }
+    ).exec();
+
     res.status(201).json({ message: "Question added successfully", data: { question } });
   } catch (error) {
     console.error("Error adding question:", error);

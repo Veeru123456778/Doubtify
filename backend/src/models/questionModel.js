@@ -1,4 +1,4 @@
-import mongoose,{Schema} from 'mongoose'
+import mongoose,{Schema} from 'mongoose';
 
 const questionSchema = new mongoose.Schema({
     userId:{
@@ -10,12 +10,11 @@ const questionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    category:{
-        type:String
-    },
-    subCategory:{
-        type:String
-    },
+    categoryId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'categoryModel'
+      },
+ 
     files:[
         {type:String}
     ],

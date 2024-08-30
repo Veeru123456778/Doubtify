@@ -4,14 +4,30 @@ import { FiChevronDown } from 'react-icons/fi';
 import Hero from '../components/Hero';
 import axios from 'axios';
 import UserContext from '../context/userContext';
+import { getCategoryWithQuestions } from '../api/categoryApi.jsx';
 
 const DetailedCategory = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('Select Filter');
   const [questions, setQuestions] = useState([]);
+  const [categoryData,setCategoryData] = useState({});
   const { backend_url,isDarkTheme } = useContext(UserContext);
   const location = useLocation();
-  const {category} = location.state;
+  const {id} = location.state;
+  
+  useEffect(() => {
+    const getFullCategory = async () => {
+        try {
+            const data = await getCategoryWithQuestions(backend_url,id);
+            console.log(data);
+            setCategoryData(data);
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+        }
+    };
+
+    getFullCategory();
+}, [backend_url]);
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);
@@ -42,7 +58,7 @@ const DetailedCategory = () => {
     <div className="w-full p-6 flex flex-col items-center">
       <div className="w-full md:w-1/2">
         <div className="flex justify-between">
-          <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>{category}</h1>
+          <h1 className={`text-2xl font-bold ${isDarkTheme?'text-white':'text-black'}`}>{categoryData.categoryName}</h1>
           <div className="relative">
             <button
               onClick={handleFilterClick}
@@ -83,11 +99,17 @@ const DetailedCategory = () => {
         <hr className="mt-3 border-gray-300" />
       </div>
       <hr className="border-gray-300" />
+  
       <div className="flex flex-col justify-center items-center w-full">
-        {questions.map((ques, index) => (
-          <Hero question={ques} key={index} />
-        ))}
-      </div>
+  {categoryData.questions && categoryData.questions.length > 0 ? (
+    categoryData.questions.map((ques, index) => (
+      <Hero question={ques} key={index} />
+    ))
+  ) : (
+    <p>No Questions Found for this particular Category!</p>
+  )}
+</div>
+
     </div>
   );
 };

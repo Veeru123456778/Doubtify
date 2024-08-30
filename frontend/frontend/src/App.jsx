@@ -27,7 +27,6 @@ import ResetPassword from './pages/ResetPassword.jsx';
 import CommentsPage from './pages/comments.jsx';
 import SearchPage from './pages/searchPage.jsx';
 import DetailedCategory from './pages/DetailedCategory.jsx';
-import RepliesPage from './pages/RepliesPage.jsx';
 
 
 function App() {
@@ -87,15 +86,16 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/question/:questionId/answer/:answerId/comments" element={<CommentsPage />} />
-            <Route path="/commentsReplies/:commentId" element={<RepliesPage />} />
+            {/* <Route path="/commentsReplies/:commentId" element={<RepliesPage />} /> */}
             <Route path="/detailedCategory" element={<DetailedCategory />} />
             <Route path="/detailedCategory/answer" element={<Answer />} />
+            <Route path="/profile/answer" element={<Answer />} />
           </Routes>
           </Suspense>
         </div>
         {!isAuthPage && <RightSidebar className="w-1/4" />}
       </div>
-      <ToastContainer  autoClose={3000} // auto-close after 3 seconds
+      <ToastContainer  autoClose={1000} // auto-close after 3 seconds
       />
    </div>
 

@@ -69,8 +69,8 @@ const NavBar = ({ toggleSidebar }) => {
     axios
       .get(`${backend_url}/api/search/ques?q=${encodeURIComponent(query)}`)
       .then((response) => {
-        setSuggestions(response.data);
-        setShowSuggestions(true);
+        // setSuggestions(response.data);
+        // setShowSuggestions(true);
       })
       .catch((error) => {
         console.error("Error searching:", error);
@@ -152,7 +152,7 @@ const NavBar = ({ toggleSidebar }) => {
                 backgroundPosition: "8px center",
                 backgroundRepeat: "no-repeat",
               }}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
             />
             <button
               className={`absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 focus:outline-none ${

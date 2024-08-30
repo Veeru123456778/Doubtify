@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import DropdownComponent from './DropdownComponent';
 
 const AskQuestionPopup = ({ onClose }) => {
-  const [category, setCategory] = useState('');
-  const [subCategory, setSubCategory] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  // const [subCategory, setSubCategory] = useState('');
   const [question, setQuestion] = useState('');
   const [rows, setRows] = useState(1);
   const [files, setFiles] = useState([]);
@@ -42,8 +42,7 @@ const AskQuestionPopup = ({ onClose }) => {
     const handleAddQuestion = async () => {
     const formData = new FormData();
     formData.append('body', question);
-    formData.append('category', category); 
-    formData.append('subCategory', subCategory); 
+    formData.append('categoryId', categoryId); 
     files.forEach((file, index) => {
       formData.append('files', file);
     });
@@ -88,7 +87,8 @@ const AskQuestionPopup = ({ onClose }) => {
           />
         </div>
       
-        <DropdownComponent category={category} subCategory={subCategory} setCategory={setCategory} setSubCategory={setSubCategory}/>
+        <DropdownComponent categoryId={categoryId} setCategoryId={setCategoryId} />
+        {/* setSubCategory={setSubCategory} */}
         <div className="flex items-center justify-between mt-6">
           <label className="flex items-center">
             <input type="file" className="hidden" multiple onChange={handleFileChange} />

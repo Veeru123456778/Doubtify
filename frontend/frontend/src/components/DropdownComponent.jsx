@@ -2,21 +2,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import UserContext from "../context/userContext";
+import { fetchCategories } from '../api/categoryApi.jsx';
 
-const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) => {
+const DropdownComponent = ({categoryId,setCategoryId}) => {
 
-    const [categories, setCategories] = useState([]);
-    const [subcategories, setSubcategories] = useState([]);
+    const [categoriesData, setCategoriesData] = useState([]);
     const [loadingCategories, setLoadingCategories] = useState(true);
-    const [loadingSubcategories, setLoadingSubcategories] = useState(false);
     const [error, setError] = useState(null);
-    const { isDarkTheme } = useContext(UserContext);
+    const { isDarkTheme,backend_url } = useContext(UserContext);
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchAllCategories = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/category/categories');
-                setCategories(response.data);
+                const response = await fetchCategories(backend_url);
+                console.log(response.categories);
+                setCategoriesData(response.categories);
                 setLoadingCategories(false);
             } catch (error) {
                 setError('Error fetching categories');
@@ -24,29 +24,9 @@ const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) =>
             }
         };
 
-        fetchCategories();
+        fetchAllCategories();
     }, []);
-
-    useEffect(() => {
-        const fetchSubcategories = async () => {
-            if (category) {
-                setLoadingSubcategories(true);
-                try {
-                    const response = await axios.get(`http://localhost:3000/api/category/subcategories/${category}`);
-                    setSubcategories(response.data);
-                    setLoadingSubcategories(false);
-                } catch (error) {
-                    setError('Error fetching subcategories');
-                    setLoadingSubcategories(false);
-                }
-            } else {
-                setSubcategories([]);
-            }
-        };
-
-        fetchSubcategories();
-    }, [category]);
-
+    
     return (
         <div className="flex-col sm:flex sm:flex-row gap-6 2xl:w-12">
             <div className="mb-4">
@@ -59,14 +39,14 @@ const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) =>
                     ) : (
                         <select
                             id="category"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
                             className={`block appearance-none w-64 xl:w-80 2xl:w-96 border border-gray-400 hover:border-gray-500 p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#858EAC] text-white' : 'bg-white'}`}
                         >
                             <option value="">Select a category</option>
-                            {categories.map((Category) => (
-                                <option key={Category} value={Category}>
-                                    {Category}
+                            {categoriesData && categoriesData.map((Category) => (
+                                <option key={Category._id} value={Category._id}>
+                                    {Category.categoryName}
                                 </option>
                             ))}
                         </select>
@@ -74,34 +54,10 @@ const DropdownComponent = ({category,subCategory,setCategory,setSubCategory}) =>
                     {error && <p className="text-red-500">{error}</p>}
                 </div>
             </div>
-            <div className="mb-4">
-                <label className={`block text-sm font-bold mb-2 ${isDarkTheme ? 'text-slate-200' : 'text-gray-700'}`} htmlFor="subcategory">
-                    Subcategory
-                </label>
-                <div className="relative">
-                    {loadingSubcategories ? (
-                        <p>Loading subcategories...</p>
-                    ) : (
-                        <select
-                            id="subcategory"
-                            value={subCategory}
-                            onChange={(e) => setSubCategory(e.target.value)}
-                            className={`block appearance-none w-64 xl:w-80 2xl:w-96 border border-gray-400 hover:border-gray-500 p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#858EAC] text-white' : 'bg-white'}`}
-                            disabled={!category}
-                        >
-                            <option value="">Select a subcategory</option>
-                            {subcategories.map((subcategory) => (
-                                <option key={subcategory} value={subcategory}>
-                                    {subcategory}
-                                </option>
-                            ))}
-                        </select>
-                    )}
-                    {error && <p className="text-red-500">{error}</p>}
-                </div>
-            </div>
-        </div>
+                   </div>
     );
 };
 
 export default DropdownComponent;
+
+

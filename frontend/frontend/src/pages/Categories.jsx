@@ -45,30 +45,38 @@
 // export default Categories;
 
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import searchIcon from '../assets/search.png'; // Ensure the path is correct
 import CategoryCard from '../components/CategoryCard';
 import UserContext from '../context/userContext';
-
-// Sample categories data
-const categoriesData = [
-  { category: 'Blockchain', count: 2585 },
-  { category: 'Data Structures', count: 253 },
-  { category: 'Machine Learning', count: 1285 },
-  { category: 'Artificial Intelligence', count: 2585 },
-  { category: 'Operating System', count: 2285 },
-  { category: 'Computer Networks', count: 25 },
-  // Add more categories here if needed
-];
+import { fetchCategories } from '../api/categoryApi.jsx';
 
 const Categories = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { isDarkTheme } = useContext(UserContext);
+  const [categoriesData,setCategoriesData] = useState([]);
+  const { isDarkTheme,backend_url } = useContext(UserContext);
+
+  useEffect(() => {
+    const getCategories = async () => {
+        try {
+            const data = await fetchCategories(backend_url);
+            console.log(data.categories);
+            setCategoriesData(data.categories);
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+        }
+    };
+
+    getCategories();
+}, [backend_url]);
+
+
 
   // Filter categories based on search query
   const filteredCategories = categoriesData.filter(category =>
-    category.category.replace(/\s+/g, '').toLowerCase().includes(searchQuery.replace(/\s+/g, '').toLowerCase())
+    category.categoryName.replace(/\s+/g, '').toLowerCase().includes(searchQuery.replace(/\s+/g, '').toLowerCase())
   );
+
 
   return (
     <div className="w-full h-screen p-6 flex flex-col items-center">
@@ -94,9 +102,13 @@ const Categories = () => {
 
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mt-4 gap-5">
-          {filteredCategories.map((category, index) => (
-            <CategoryCard key={index} category={category.category} count={category.count} />
-          ))}
+        {filteredCategories.length > 0 ? (
+            filteredCategories.map((category, index) => (
+              <CategoryCard key={category._id} category={category}  />
+            ))
+          ) : (
+            <p>No categories found</p>
+          )}
         </div>
       </div>
     </div>
@@ -104,3 +116,6 @@ const Categories = () => {
 };
 
 export default Categories;
+
+
+ 
