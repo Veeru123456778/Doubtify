@@ -42,6 +42,7 @@ const handleScroll = ()=>{
   }
 }
 
+
 if (loading) {
   return (
     <div className="flex justify-center items-center h-screen">
@@ -55,6 +56,7 @@ if (loading) {
     {questions.map((ques, index) => (
           <Hero question={ques} key={index} />
         ))}
+       
   </div>;
 };
 

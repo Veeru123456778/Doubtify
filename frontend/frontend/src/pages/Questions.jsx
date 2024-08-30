@@ -24,11 +24,11 @@ const Questions = () => {
     applyFilter(filter);
   };
 
-  const handleScroll = ()=>{
-    if(window.innerHeight+window.scrollY>=document.body.scrollHeight-2){
-         setPage(prevPage=>prevPage+1);
-    }
-  }
+  // const handleScroll = ()=>{
+  //   if(window.innerHeight+window.scrollY>=document.body.scrollHeight-2){
+  //        setPage(prevPage=>prevPage+1);
+  //   }
+  // }
   
   useEffect(() => {
     const fetchData = async () => {
@@ -48,11 +48,11 @@ const Questions = () => {
     fetchData();
   }, [backend_url, selectedFilter,page]);
 
-  useEffect(()=>{
-    window.addEventListener('scroll',handleScroll);
+  // useEffect(()=>{
+  //   window.addEventListener('scroll',handleScroll);
     
-    return ()=>window.removeEventListener('scroll',handleScroll);
-  },[])
+  //   return ()=>window.removeEventListener('scroll',handleScroll);
+  // },[])
 
 
   const fetchAnswersForQuestions = async (questions) => {
@@ -101,6 +101,11 @@ const Questions = () => {
       </div>
     );
   }
+
+  
+const handleMoreQues=()=>{
+  setPage(prev=>prev+1);
+}
 
   return (
     <div className="w-full p-6 flex flex-col items-center">
@@ -151,6 +156,8 @@ const Questions = () => {
         {filteredQuestions.map((ques, index) => (
           <Hero question={ques} key={index} />
         ))}
+        <button className='text-blue py-2' onClick={handleMoreQues}>See More Ques</button>
+
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import { TbArrowBigDownFilled } from "react-icons/tb";
 import { TbArrowBigUpFilled } from "react-icons/tb";
 import { RiMessageFill } from "react-icons/ri";
 import { FaBookmark } from "react-icons/fa";
+import SliderComp from './Slider.jsx';
 
 
 
@@ -221,6 +222,9 @@ const AnswerCard = ({ answer, question }) => {
       </div>
       <div>
         <h3 className={`text-base font-extralight mb-2 ${isDarkTheme?'text-white':'text-black'}`}>{answer.body}</h3>
+
+         {answer.files && <SliderComp Files={answer.files}/>}
+
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button

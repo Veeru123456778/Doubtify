@@ -221,11 +221,11 @@ const Hero = ({ stopOnClick, question }) => {
             <h2 className={`text-base font-semibold ${isDarkTheme ? 'text-white' : 'text-black'}`}>
               {User.firstName} {User.lastName}
             </h2>
-            <div className="flex gap-x-2">
-              <p className={isDarkTheme?"text-gray-400 text-xs":"text-gray-600 text-xs"}>
-                Second year BTECH CSE Student
-              </p>
-              <p className="text-gray-500 text-[11px] font-thin">
+            <div className="flex gap-4">
+              {User.bio && <p className={isDarkTheme?"text-gray-400 text-xs":"text-gray-600 text-xs"}>
+                {User.bio}
+              </p>}
+              <p className={`text-gray-500 text-[11px] font-sm ${isDarkTheme ? 'text-gray-200' : 'text-black'}`}>
                 {formatDate(question.createdAt)}
               </p>
             </div>

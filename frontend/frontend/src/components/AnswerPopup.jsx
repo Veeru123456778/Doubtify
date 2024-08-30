@@ -166,6 +166,18 @@ const AnswerPopup = ({ question, setShowAnswerPopup,draft=null }) => {
             Publish
           </button>
         </div>
+        <div className="mt-4">
+          {files.length > 0 && (
+            <div>
+              <h4 className="font-semibold mb-2">Attached Files:</h4>
+              <ul className="list-inside flex gap-5">
+                {files.map((file, index) => (
+                  <li key={index} className="text-gray-700">{file.name}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

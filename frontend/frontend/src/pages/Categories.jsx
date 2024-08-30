@@ -103,15 +103,18 @@ const Categories = () => {
       </div>
 
       <div className="flex justify-center items-center">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mt-4 gap-5">
-        {filteredCategories.length > 0 ? (
-            filteredCategories.map((category, index) => (
+      {filteredCategories.length > 0 ? 
+             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mt-4 gap-5">
+      
+            {filteredCategories.map((category, index) => (
               <CategoryCard key={category._id} category={category}  />
             ))
-          ) : (
-            <p>No categories found</p>
-          )}
-        </div>
+            }
+        </div>:
+       
+            <p className='w-full text-center align-middle'>No categories found</p>
+         
+      }
       </div>
     </div>
   );
