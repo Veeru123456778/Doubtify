@@ -102,7 +102,7 @@ const Questions = () => {
     );
   }
 
-  
+
 const handleMoreQues=()=>{
   setPage(prev=>prev+1);
 }

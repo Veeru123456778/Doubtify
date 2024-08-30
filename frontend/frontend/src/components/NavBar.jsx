@@ -71,8 +71,8 @@ const NavBar = ({ toggleSidebar }) => {
     axios
       .get(`${backend_url}/api/search/ques?q=${encodeURIComponent(query)}`)
       .then((response) => {
-        // setSuggestions(response.data);
-        // setShowSuggestions(true);
+        setSuggestions(response.data);
+        setShowSuggestions(true);
       })
       .catch((error) => {
         console.error("Error searching:", error);

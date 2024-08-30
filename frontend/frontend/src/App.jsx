@@ -85,6 +85,7 @@ function App() {
             <Route path="/question/:id" element={<PublicQuestion />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/search/answer" element={<Answer />} />
             <Route path="/question/:questionId/answer/:answerId/comments" element={<CommentsPage />} />
             {/* <Route path="/commentsReplies/:commentId" element={<RepliesPage />} /> */}
             <Route path="/detailedCategory" element={<DetailedCategory />} />

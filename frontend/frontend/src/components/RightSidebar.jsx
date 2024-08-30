@@ -1,5 +1,5 @@
 // src/components/RightSidebar.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 import { useContext } from 'react';
@@ -36,7 +36,10 @@ const RightSidebar = () => {
     fetchTopCategories();
   }, []);
 
-  
+  const handleClick = useCallback((id) => {
+    navigate(`/detailedCategory`, { state: { id } });
+  }, []);
+
   return (
     <div className={isDarkTheme ?"hidden md:p-1 md:block xl:w-64 lg:w-52 md:w-44 fixed top-16 right-0 h-full bg-dark shadow-slate-700	shadow-md p-4  flex-col space-y-2   ": " xl:w-64 lg:w-52 md:w-44  md:p-1 md:block fixed top-16 right-0 h-full bg-[#F5F2FF] shadow-lg p-4 flex flex-col space-y-2 "}>
       <div className={isDarkTheme ?"h-full bg-dark p-4 flex flex-col space-y-2 rounded-lg":"h-full bg-white p-4 flex flex-col space-y-2 rounded-lg"}>
@@ -46,6 +49,7 @@ const RightSidebar = () => {
         return (
           <button
             key={c._id} 
+            onClick={()=>handleClick(c._id)}
             className={`${
               isDarkTheme
                 ? 'bg-[#323B4A] text-[#E0E0E0] border-1 border-[#404b5a] hover:bg-[#2C3545]'

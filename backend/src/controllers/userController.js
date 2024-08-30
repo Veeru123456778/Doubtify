@@ -202,22 +202,29 @@ const getUserInterests =  (async (req, res) => {
   }
 })
 
+
 const updateUser = async (req, res) => {
-  const { bio } = req.body;
   const { userId } = req.params;
+  const { firstName, lastName, bio } = req.body;
 
   try {
-    // Update the user's bio using findByIdAndUpdate method
-    const user = await userModel.findByIdAndUpdate(userId, { bio }, { new: true });
+    // Construct an object with the fields that are provided in the request
+    const updateFields = {};
+    if (firstName !== undefined) updateFields.firstName = firstName;
+    if (lastName !== undefined) updateFields.lastName = lastName;
+    if (bio !== undefined) updateFields.bio = bio;
+
+    // Update the user's profile with the provided fields using findByIdAndUpdate
+    const user = await userModel.findByIdAndUpdate(userId, updateFields, { new: true });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ message: 'Bio updated successfully', user });
+    res.status(200).json({ message: 'Profile updated successfully', user });
   } catch (error) {
     // Handle any errors and send an error response
-    console.error('Error updating Bio:', error);
+    console.error('Error updating profile:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

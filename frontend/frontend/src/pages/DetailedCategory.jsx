@@ -27,7 +27,7 @@ const DetailedCategory = () => {
     };
 
     getFullCategory();
-}, [backend_url]);
+}, [backend_url,id]);
 
   const handleFilterClick = () => {
     setShowFilter(!showFilter);

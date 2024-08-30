@@ -23,7 +23,7 @@ userRouter.post("/signinGoogle", login_userGoogle);
 userRouter.get("/userInfo", authMiddleware, getUserDetails); 
 userRouter.post("/otheruserInfo", getOtherUserInfo); 
 userRouter.put('/:userId/interests', updateUserInterests);
-userRouter.put('/:userId/bio', updateUser);
+userRouter.put('/:userId', updateUser);
 userRouter.get('/:userId/interests', getUserInterests);
 userRouter.post('/notification/:userId',notifications);
 
