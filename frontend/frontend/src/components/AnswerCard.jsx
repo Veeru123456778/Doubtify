@@ -77,7 +77,7 @@ const AnswerCard = ({ answer, question }) => {
   }, [backend_url, user, answer._id, answer.userId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   const handleUpvotes = async (e) => {
