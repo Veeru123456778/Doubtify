@@ -10,6 +10,8 @@ import { TbArrowBigUpFilled } from "react-icons/tb";
 import { RiMessageFill } from "react-icons/ri";
 import { FaBookmark } from "react-icons/fa";
 
+
+
 const AnswerCard = ({ answer, question }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [Users, setUsers] = useState("");
@@ -222,19 +224,19 @@ const AnswerCard = ({ answer, question }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
-              className={`flex items-center text-green-600 px-4 py-2 bg-green-100 rounded-lg mr-4 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
+              className={`flex items-center text-green-600 px-4 py-1 bg-green-100 rounded-lg mr-4 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
               onClick={handleUpvotes}
             >
               <TbArrowBigUpFilled className={`mr-1 ${isUpvote ? 'text-white' : ''}`} />{upvotes}
               </button>
             <button
-              className={`flex items-center text-red-600 px-4 py-2 bg-red-100 rounded-lg mr-4 ${isDownvote ? 'bg-red-600 text-white' : ''}`}
+              className={`flex items-center text-red-600 px-4 py-1 bg-red-100 rounded-lg mr-4 ${isDownvote ? 'bg-red-600 text-white' : ''}`}
               onClick={handleDownvotes}
             >
               <TbArrowBigDownFilled className={`mr-1 ${isDownvote ? 'text-white' : ''}`} />{downVotes}
               </button>
 
-            <button className="flex items-center text-blue-600 px-4 py-2 bg-blue-100 rounded-lg mr-4" onClick={handleComments}>
+            <button className="flex items-center text-blue-600 px-4 py-1 bg-blue-100 rounded-lg mr-4" onClick={handleComments}>
             <RiMessageFill  className="mr-1" />{comments.length}
             </button>
           </div>

@@ -17,6 +17,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { TbArrowBigUpFilled } from "react-icons/tb";
+import { HiPencilAlt } from "react-icons/hi";
 
 
 const Hero = ({ stopOnClick, question }) => {
@@ -254,11 +255,11 @@ const Hero = ({ stopOnClick, question }) => {
             <div className="flex items-center mb-2 sm:mb-0">
               <button
                 onClick={handleAnswerClick}
-                className="text-blue-600 mr-2 px-4 py-1 bg-blue-100 rounded-lg"
+                className="text-blue-600 mr-2 px-2 py-1 bg-blue-100 rounded-lg"
               >
                 {load?
       <TailSpin color="#00BFFF" height={23} width={23} className="mr-2 px-4 py-1" />
-   :<p>Answer</p>}
+   :<p className="flex items-center font-semibold"><HiPencilAlt /> Answer </p>}
 
                 
               </button>
