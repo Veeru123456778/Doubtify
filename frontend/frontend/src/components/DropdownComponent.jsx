@@ -30,8 +30,8 @@ const DropdownComponent = ({categoryId,setCategoryId}) => {
     return (
         <div className="flex-col sm:flex sm:flex-row gap-6 2xl:w-12">
             <div className="mb-4">
-                <label className={`block text-sm font-bold mb-2 ${isDarkTheme ? 'text-slate-200' : 'text-gray-700'}`} htmlFor="category">
-                    Category
+            <label className={`block text-sm font-bold mb-2 ${isDarkTheme ? 'text-[#E0E0E0]' : 'text-gray-700'}`} htmlFor="category">
+            Category
                 </label>
                 <div className="relative mb-4">
                     {loadingCategories ? (
@@ -41,7 +41,7 @@ const DropdownComponent = ({categoryId,setCategoryId}) => {
                             id="category"
                             value={categoryId}
                             onChange={(e) => setCategoryId(e.target.value)}
-                            className={`block appearance-none w-64 xl:w-80 2xl:w-96 border border-gray-400 hover:border-gray-500 p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#858EAC] text-white' : 'bg-white'}`}
+                            className={`block appearance-none w-64 xl:w-80 2xl:w-96 border   p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline ${isDarkTheme ? 'bg-[#323B4A] text-[#E0E0E0] border-[#404b5a] ' : 'bg-white hover:border-gray-500 border-gray-400'}`}
                         >
                             <option value="">Select a category</option>
                             {categoriesData && categoriesData.map((Category) => (

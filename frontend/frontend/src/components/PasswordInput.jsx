@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const PasswordInput = ({ value, onChange }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const [isDarkTheme, setIsDarkTheme] = useState(true); // Example theme state
+
 
     return (
         <div>
@@ -9,7 +11,7 @@ const PasswordInput = ({ value, onChange }) => {
                 type={showPassword ? 'text' : 'password'}
                 value={value}
                 onChange={onChange}
-                className="form-input w-full text-gray-300"
+                className={`form-input w-full  ${isDarkTheme ? 'text-gray-900':'text-gray-300'} `}
                 placeholder="Password (at least 10 characters)"
                 required
             />

@@ -140,13 +140,13 @@ const AnswerPopup = ({ question, setShowAnswerPopup,draft=null }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div ref={popupRef} className={` p-6 rounded-lg shadow-slate-600 shadow-sm w-[750px] relative ${isDarkTheme?'bg-[#1f2530]':'bg-white'}`}>
-        <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+      <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
           &#10005;
         </button>
         <h2 className={`text-xl font-semibold mb-8 text-center ${isDarkTheme?'text-white':'text-black'}`}>{question.body}</h2>
         <div className="mb-4">
           <textarea 
-            className={`w-full border border-gray-300 p-2 rounded resize-none overflow-auto ${isDarkTheme?'bg-[#858EAC] text-white placeholder-white':'bg-white text-black'}`}
+            className={`w-full border  p-2 rounded resize-none overflow-auto ${isDarkTheme?'bg-[#323B4A] border-[#404b5a] text-[#E0E0E0] placeholder-[#E0E0E0]':'bg-white border-gray-300 text-black'}`}
             rows={rows}
             placeholder="Start typing your Answer..."
             value={answer}

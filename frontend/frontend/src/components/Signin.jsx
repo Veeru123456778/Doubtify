@@ -107,14 +107,14 @@ function SignIn() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                      
-                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="email">Email</label>
-                      <input
+                    <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="email">Email</label>            
+                              <input
                         id="email"
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="form-input w-full text-gray-300"
+                        className="form-input w-full text-gray-900"
                         placeholder="Example@gmail.com"
                         required
                       />
@@ -125,7 +125,7 @@ function SignIn() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                    
-                      <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">Password</label>
+                    <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">Password</label>
                   
                       <PasswordInput
                         value={formData.password}

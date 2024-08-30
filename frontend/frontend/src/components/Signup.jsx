@@ -53,7 +53,7 @@ function SignUp() {
                 <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-300" placeholder="Example@gamil.com" required />
+                      <input id="email" type="email" className="form-input w-full text-gray-900" placeholder="Example@gamil.com" required />
                     </div>
                     </div>
                     
@@ -61,29 +61,29 @@ function SignUp() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
+                      <input id="password" type="password" className="form-input w-full text-gray-900" placeholder="Password (at least 10 characters)" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="password">confirm Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
+                      <input id="password" type="password" className="form-input w-full text-gray-900" placeholder="Password (at least 10 characters)" required />
                     </div>
                   </div>
                   <div className="flex  -mx-3 mb-4">
                     <div className="w-full flex flex-col px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="full-name">First Name<span className="text-red-600">*</span></label>
-                      <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="First name" required />
+                      <input id="full-name" type="text" className="form-input w-full text-gray-900" placeholder="First name" required />
                     </div>
                     <div className="w-full flex flex-col px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="full-name">Last Name <span className="text-red-600">*</span></label>
-                      <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="last name" required />
+                      <input id="full-name" type="text" className="form-input w-full text-gray-900" placeholder="last name" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className={isDarkTheme ? ' font-medium mb-1 text-sm block text-gray-300' : 'font-medium mb-1  block text-sm text-black'} htmlFor="profile-picture">Profile Picture</label>
-                      <input id="profile-picture" type="file" className="form-input w-full text-gray-300" />
+                      <input id="profile-picture" type="file" className="form-input w-full text-gray-900" />
                     </div>
                   </div>
                   {/* <div className="flex flex-wrap -mx-3 mb-4">

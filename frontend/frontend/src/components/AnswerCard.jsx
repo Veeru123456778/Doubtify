@@ -5,6 +5,10 @@ import UserContext from '../context/userContext';
 import useFetchUser from '../hooks/useFetchUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { TbArrowBigDownFilled } from "react-icons/tb";
+import { TbArrowBigUpFilled } from "react-icons/tb";
+import { RiMessageFill } from "react-icons/ri";
+import { FaBookmark } from "react-icons/fa";
 
 const AnswerCard = ({ answer, question }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -200,9 +204,7 @@ const AnswerCard = ({ answer, question }) => {
   
   return (
     <div className={`xl:p-6 p-4 rounded-lg shadow-slate-600 shadow-sm md:w-1/2 w-full my-4 place-items-center relative ${isDarkTheme ? 'bg-[#1f2530]' : 'bg-gray-100'}`}>
-      <button className="absolute top-2 right-2 text-gray-500">
-        <FiX size={20} />
-      </button>
+     
       <div className="flex items-center mb-4">
         <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center mr-4">
           <span className="text-gray-500 text-lg">AS</span>
@@ -223,18 +225,18 @@ const AnswerCard = ({ answer, question }) => {
               className={`flex items-center text-green-600 px-4 py-2 bg-green-100 rounded-lg mr-4 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
               onClick={handleUpvotes}
             >
-              <FiArrowUp className={`mr-1 ${isUpvote ? 'text-white' : ''}`} /> {upvotes}
-            </button>
+              <TbArrowBigUpFilled className={`mr-1 ${isUpvote ? 'text-white' : ''}`} />{upvotes}
+              </button>
             <button
               className={`flex items-center text-red-600 px-4 py-2 bg-red-100 rounded-lg mr-4 ${isDownvote ? 'bg-red-600 text-white' : ''}`}
               onClick={handleDownvotes}
             >
-              <FiArrowDown className={`mr-1 ${isDownvote ? 'text-white' : ''}`} /> {downVotes}
-            </button>
+              <TbArrowBigDownFilled className={`mr-1 ${isDownvote ? 'text-white' : ''}`} />{downVotes}
+              </button>
 
             <button className="flex items-center text-blue-600 px-4 py-2 bg-blue-100 rounded-lg mr-4" onClick={handleComments}>
-               <FiMessageSquare className="mr-1" /> {comments.length}
-              </button>
+            <RiMessageFill  className="mr-1" />{comments.length}
+            </button>
           </div>
 
           <div className="relative">
@@ -242,15 +244,15 @@ const AnswerCard = ({ answer, question }) => {
               <FiMoreHorizontal size={20} />
             </button>
             {showOptions && (
-              <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg z-10">
-                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleCopyLink}>
+              <div className={`absolute right-0 mt-2  rounded shadow-lg z-10 ${isDarkTheme ?'bg-[#323B4A] border-[#404b5a] text-[#E0E0E0]':'bg-white border border-gray-300'}`}>
+                <button className={`flex items-center px-4 py-2   ${isDarkTheme ?'hover:bg-[#2C3545]':'hover:bg-gray-100'}`} onClick={handleCopyLink}>
                   <FiLink className="mr-2" /> Copy Link
                 </button>
-                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleBookmark}>
+                <button className={`flex items-center px-4 py-2   ${isDarkTheme ?'hover:bg-[#2C3545]':'hover:bg-gray-100'}`} onClick={handleBookmark}>
                   <FiBookmark className="mr-2" /> Bookmark
                 </button>
-                <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleRemoveBookmark}>
-                  <FiBookmark className="mr-2" /> Remove Bookmark
+                <button className={`flex items-center px-4 py-2   ${isDarkTheme ?'hover:bg-[#2C3545]':'hover:bg-gray-100'}`} onClick={handleRemoveBookmark}>
+                  <FiBookmark className="mr-2" /> Remove
                 </button>
               </div>
             )}

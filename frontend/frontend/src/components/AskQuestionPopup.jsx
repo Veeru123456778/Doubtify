@@ -71,14 +71,14 @@ const AskQuestionPopup = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className={`${isDarkTheme? 'bg-[#1f2530]':'bg-white '} shadow-slate-700 shadow-md p-6  w-11/12 sm:w-4/5 md:w-3/5 relative `}>
-        <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 ">
-          &#10005;
-        </button>
-        <h2 className={`${isDarkTheme?' text-white text-xl font-semibold mb-8 text-center':' text-black text-xl font-semibold mb-8 text-center'}`}>Add Question</h2>
+    <div className={`${isDarkTheme? 'bg-[#1f2530]':'bg-white '} shadow-slate-700 shadow-md p-6  w-11/12 sm:w-4/5 md:w-3/5 relative `}>
+      <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 ">
+        &#10005;
+      </button>
+      <h2 className={`${isDarkTheme?' text-white text-xl font-semibold mb-8 text-center':' text-black text-xl font-semibold mb-8 text-center'}`}>Add Question</h2>
         <div className="mb-4">
           <textarea
-            className={`w-full border border-gray-300 p-2 rounded resize-none overflow-auto ${isDarkTheme? 'bg-[#858EAC] placeholder-white':'bg-white'}`}
+            className={`w-full border  p-2 rounded resize-none overflow-auto ${isDarkTheme? 'bg-[#323B4A] placeholder-[#E0E0E0] border-[#404b5a] text-[#E0E0E0]':'bg-[white] border-gray-300'}`}
             rows={rows}
             placeholder="Start typing your question..."
             value={question}

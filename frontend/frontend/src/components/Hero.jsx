@@ -16,6 +16,8 @@ import { TailSpin } from 'react-loader-spinner';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { TbArrowBigUpFilled } from "react-icons/tb";
+
 
 const Hero = ({ stopOnClick, question }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -205,9 +207,7 @@ const Hero = ({ stopOnClick, question }) => {
 
   return (
     <div className={`xl:p-6 p-4 rounded-lg  shadow-slate-600 shadow-sm w-full md:w-1/2 my-4 place-items-center relative ${isDarkTheme ? `bg-[#1f2530]` : 'bg-gray-100'}`}>
-      <button className="absolute top-2 right-2 text-gray-500">
-        <FiX size={20} />
-      </button>
+      
       <div className="cursor-pointer">
         <div className="flex items-center mb-4">
           <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center mr-4">
@@ -256,13 +256,18 @@ const Hero = ({ stopOnClick, question }) => {
                 onClick={handleAnswerClick}
                 className="text-blue-600 mr-2 px-4 py-1 bg-blue-100 rounded-lg"
               >
-                Answer
+                {load?
+      <TailSpin color="#00BFFF" height={23} width={23} className="mr-2 px-4 py-1" />
+   :<p>Answer</p>}
+
+                
               </button>
               <button
                 className={`flex items-center text-green-600 px-4 py-1 bg-green-100 rounded-lg mr-2 ${isUpvote ? 'bg-green-600 text-white' : ''}`}
                 onClick={handleUpvotes}
               >
-                <FiArrowUp className={`mr-1 ${isUpvote ? 'text-white' : ''}`} />{upvotes}
+                                <TbArrowBigUpFilled  className={`mr-1 ${isUpvote ? 'text-white' : ''}`}/>{upvotes}
+
               </button>
             </div>
             <div className="relative">
@@ -273,11 +278,11 @@ const Hero = ({ stopOnClick, question }) => {
                 <FiMoreHorizontal size={20} />
               </button>
               {showOptions && (
-                <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg z-10">
-                  <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleCopyLink}>
+                <div  className={`absolute right-0 mt-2  rounded shadow-lg z-10 ${isDarkTheme ?'text-[#E0E0E0] border-[#404b5a] bg-[#323B4A]':'bg-white border border-gray-300'}`}>
+                  <button className={`flex items-center px-4 py-2   ${isDarkTheme ?'hover:bg-[#2C3545]':'hover:bg-gray-100'}`} onClick={handleCopyLink}>
                     <FiLink className="mr-2" /> Copy Link
                   </button>
-                  <button className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={handleBookmark}>
+                  <button className={`flex items-center px-4 py-2   ${isDarkTheme ?'hover:bg-[#2C3545]':'hover:bg-gray-100'}`} onClick={handleBookmark}>
                     <FiBookmark className="mr-2" /> Bookmark
                   </button>
                 </div>

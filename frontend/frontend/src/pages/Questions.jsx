@@ -110,33 +110,33 @@ const Questions = () => {
           <div className="relative">
             <button
               onClick={handleFilterClick}
-              className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded shadow-sm w-40 xl:w-48 justify-between"
+              className={`flex items-center px-4 py-2  rounded shadow-sm w-40 xl:w-48 justify-between ${isDarkTheme ?'bg-[#323B4A] border-[#404b5a] text-[#E0E0E0]':'bg-white border border-gray-300'}`}
             >
               {selectedFilter} <FiChevronDown className="ml-2" />
             </button>
             {showFilter && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg z-10">
+              <div className={`absolute right-0 mt-2 w-48  border  rounded shadow-lg z-10 ${isDarkTheme ?'bg-[#323B4A] border-[#404b5a] text-[#E0E0E0]':'bg-white border-gray-300'}`}>
                 <button
                   onClick={() => handleFilterSelect('Recommended')}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2  hover:bg-[#2C3545]"
                 >
                   Recommended
                 </button>
                 <button
                   onClick={() => handleFilterSelect('Most Upvoted')}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2  hover:bg-[#2C3545]"
                 >
                   Most Upvoted
                 </button>
                 <button
                   onClick={() => handleFilterSelect('Latest')}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2  hover:bg-[#2C3545]"
                 >
                   Latest
                 </button>
                 <button
                   onClick={() => handleFilterSelect('No Answer')}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2  hover:bg-[#2C3545]"
                 >
                   No Answer
                 </button>
