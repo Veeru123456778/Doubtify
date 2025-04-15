@@ -2,7 +2,7 @@ import { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import UserContext from "../context/userContext";
 
-const useFetchUser = (token, setUser) => {
+const useFetchUser = (token, setUser,user) => {
   const [loading, setLoading] = useState(true);
   const { backend_url } = useContext(UserContext);
 
@@ -28,9 +28,10 @@ const useFetchUser = (token, setUser) => {
       }
     };
     fetchUser();
-  }, [token, setUser]);
+  }, [token,setUser]);
 
   return loading;
 };
+
 
 export default useFetchUser;

@@ -288,7 +288,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const Profile = () => {
   const { setUser, token, user, backend_url } = useContext(UserContext);
-  const loading = useFetchUser(token, setUser);
+  const loading = useFetchUser(token, setUser,user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -297,6 +297,7 @@ const Profile = () => {
   const [error, setError] = useState("");
   const { isDarkTheme } = useContext(UserContext);
 
+  
   useEffect(() => {
     const fetchQuestions = async () => {
       try {

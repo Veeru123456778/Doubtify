@@ -4,19 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 const useSpeechToText = ({ continuous }) => {
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
-  
+    
     let recognition = null;
   
     const startListening = () => {
       if (!recognition) {
-        recognition = new window.webkitSpeechRecognition(); // Adjust for different browsers if needed
-        recognition.continuous = false ;
-        // recognition.continuous = continuous ;
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)(); // Adjust for different browsers if needed
+        recognition.continuous = continuous ;
+        
         recognition.onresult = handleResult;
         recognition.onerror = handleError;
         recognition.onend = () => setIsListening(false);
       }
       recognition.start();
+      recognition.onresult = handleResult;
+  
       setIsListening(true);
     };
   
@@ -32,8 +34,9 @@ const useSpeechToText = ({ continuous }) => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join('');
-  
+     
       setTranscript(currentTranscript);
+      // setTranscript((prev) => prev + ' ' + currentTranscript);
     };
   
     const handleError = (event) => {
@@ -41,7 +44,7 @@ const useSpeechToText = ({ continuous }) => {
       setIsListening(false);
     };
   
-    return { isListening, transcript, startListening, stopListening };
+    return { isListening, transcript, startListening, stopListening,setIsListening,recognition};
   };
   
 

@@ -48,12 +48,6 @@ const Questions = () => {
     fetchData();
   }, [backend_url, selectedFilter,page]);
 
-  // useEffect(()=>{
-  //   window.addEventListener('scroll',handleScroll);
-    
-  //   return ()=>window.removeEventListener('scroll',handleScroll);
-  // },[])
-
 
   const fetchAnswersForQuestions = async (questions) => {
     const questionsWithAnswers = await Promise.all(

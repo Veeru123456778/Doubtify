@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from "react";
 import { MicrophoneIcon } from "@heroicons/react/solid";
 
-const MicrophonePopup = ({ transcript, isListening, stopListening }) => {
+const MicrophonePopup = ({ transcript, isListening, stopListening ,continuous=false,setIsListening,recognition,setIsMicrophonePopupOpen }) => {
 
     const [dots, setDots] = useState("");
     const [input,setTextInput] = useState('');
@@ -35,6 +35,11 @@ const MicrophonePopup = ({ transcript, isListening, stopListening }) => {
     }
   }, [isListening, stopListening]);
 
+  const handleListeningBtn = ()=>{
+     stopListening();  
+     setIsMicrophonePopupOpen(false);
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 w-full max-w-md rounded-lg shadow-lg text-center relative">
@@ -47,6 +52,8 @@ const MicrophonePopup = ({ transcript, isListening, stopListening }) => {
               <span className="dots">Listening {dots}</span>
             )}
           </p>
+          {continuous && <button className="bg-red-600 p-1 text-white border" onClick={handleListeningBtn}>Stop Listening</button>}
+
         </div>
         {!isListening && (
           <button

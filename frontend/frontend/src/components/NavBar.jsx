@@ -25,7 +25,7 @@ const NavBar = ({ toggleSidebar }) => {
   const { setToken, setUser, user, token, backend_url, isDarkTheme } = useContext(UserContext);
   const loading = useFetchUser(token, setUser);
   const [textInput, setTextInput] = useState("");
-  const { isListening, transcript, startListening, stopListening } = useSpeechToText({ continuous: true });
+  const { isListening, transcript, startListening, stopListening } = useSpeechToText({ continuous: false });
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchTimeout = useRef(null);
