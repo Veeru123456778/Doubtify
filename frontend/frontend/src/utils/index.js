@@ -2,7 +2,7 @@ import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 
 export const createOrGetUser = async (response) => {
-  const backend_url ='https://doubtify-3.onrender.com/';
+  const backend_url ='https://doubtify-3.onrender.com';
 
     try {
     const decoded = jwtDecode(response.credential);
