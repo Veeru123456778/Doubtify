@@ -2,7 +2,6 @@ import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 
 export const createOrGetUser = async (response) => {
-  const backend_url ='https://doubtify-3.onrender.com';
 
     try {
     const decoded = jwtDecode(response.credential);
@@ -16,7 +15,7 @@ export const createOrGetUser = async (response) => {
       GoogleLogin: true,
     };
    console.log(userPayload);
-    const result = await axios.post(`${backend_url}/api/user/google-login`, userPayload);
+    const result = await axios.post(`https://doubtify-3.onrender.com/api/user/google-login`, userPayload);
 
  
     if (result.data.success) {
@@ -35,7 +34,7 @@ export const createOrGetUser = async (response) => {
 const url = ''; 
 
 export const getUser = async (response) => {
-    const url = `${backend_url}/api/user/signinGoogle`;
+    const url = `https://doubtify-3.onrender.com/api/user/signinGoogle`;
     try {
         const decoded = jwtDecode(response.credential);
         const { email } = decoded;
