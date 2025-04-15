@@ -11,7 +11,7 @@ const UserContextProvider = ({ children }) => {
   const logo_url =
     "https://res.cloudinary.com/dbghqv6ep/image/upload/v1717357720/logo_hpfbyj.jpg";
 
-  const backend_url ="http://localhost:3000";
+  const backend_url ="https://doubtify-3.onrender.com/";
   
   const toggleTheme = () => {
      setIsDarkTheme(prevTheme => !prevTheme);
