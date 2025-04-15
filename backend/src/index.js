@@ -41,9 +41,7 @@ app.get("/", (req, res) => {
   res.send("API IS WORKING");
 });
 
-// app.listen(port, (req, res) => {
-//   console.log(`Listening on port ${port}`);
-// });
-
-export const handler = serverless(app);
+app.listen(port, (req, res) => {
+  console.log(`Listening on port ${port}`);
+});
 
